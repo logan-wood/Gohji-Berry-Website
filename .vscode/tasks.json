@@ -8,6 +8,14 @@
 			"problemMatcher": [],
 			"label": "npm: start - client",
 			"detail": "react-scripts start"
+		},
+		{
+			"type": "npm",
+			"script": "run dev",
+			"path": "express",
+			"problemMatcher": [],
+			"label": "npm: run dev - express",
+			"detail": "npm nodemon index"
 		}
 	]
 }
