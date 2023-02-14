@@ -4,13 +4,14 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Nav from './Nav';
 import ContentList from './ContentList';
+import ComicList from './ComicList';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Nav />
-    <ContentList />
+    <ComicList />
   </React.StrictMode>
 );
 
