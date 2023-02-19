@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+}
+
+#main {
+    display: flex;
+}
+
+#center {
+    background-color:rgb(180, 219, 253);
+    width: 100vw;
+    min-height: 100vh;
+    text-align: center;
+}
+
+
+#left {
+    background-color: rgb(253, 180, 180);
+    min-height: 100vh;
+}
+
+#leftContent {
+    display: none;
+}
+
+#right {
+    background-color: rgb(253, 180, 180);
+    min-height: 100vh;
+}
+
+#rightContent {
+    display: none;
+}
+
+
