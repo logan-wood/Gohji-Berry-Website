@@ -5,7 +5,7 @@ dotenv.config({ path: "./.env"})
 
 var db
 
-if (process.env.DB_USE_SLL) {
+if (process.env.DB_USE_SLL = 'require') {
     // use ssl
     db = mysql.createConnection({
         host: process.env.DB_HOST,
