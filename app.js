@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const path = require('path')
 
 const dotenv = require('dotenv')
 dotenv.config({ path: './.env' })
@@ -21,6 +22,8 @@ app.use(cors())
 //init router
 const router = require('./routes/router')
 app.use(router)
+
+app.use(express.static(path.join(__dirname, "client/build")))
 
 const PORT = process.env.SERVER_PORT || 3001;
 app.listen(PORT, function () {
