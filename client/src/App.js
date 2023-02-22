@@ -51,6 +51,7 @@ export default function Nav() {
                         <h1>Main</h1>
                         <button onClick={revealLeft}>reveal left</button><br></br>
                         <button onClick={revealRight}>reveal right</button><br></br>
+                        <ComicList></ComicList>
                     </div>
                 </section>
                 <section id='right'>
