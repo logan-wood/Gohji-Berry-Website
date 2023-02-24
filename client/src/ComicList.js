@@ -44,7 +44,7 @@ class ComicList extends React.Component {
                         const file_paths_array = JSON.parse(file_paths)
                         const pictures = file_paths_array.map(link => {
                             return ( 
-                                <img src={link} style={{width: '64px', height: 'auto'}}></img> 
+                                <img src={link} style={{width: '64px', height: 'auto'}} alt="image"></img> 
                             )
                         });
                         
