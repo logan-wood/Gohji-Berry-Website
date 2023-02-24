@@ -1,5 +1,5 @@
 import React, {
-    Component
+    
 } from 'react'
 
 class ComicList extends React.Component {

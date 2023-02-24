@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ComicList from './ComicList';
 import './App.css';
 import $ from 'jquery'
