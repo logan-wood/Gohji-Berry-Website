@@ -12,7 +12,7 @@ class ComicList extends React.Component {
         this.setState({
             loading: true
         }, () => {
-            fetch("http://localhost:3001/getAllComics").then(res => res.json()).then(result => this.setState({
+            fetch("http://localhost:8080/getAllComics").then(res => res.json()).then(result => this.setState({
                 loading: false,
                 comics: result
             })).catch(console.log)
@@ -44,7 +44,7 @@ class ComicList extends React.Component {
                         const file_paths_array = JSON.parse(file_paths)
                         const pictures = file_paths_array.map(link => {
                             return ( 
-                                <img src={link} style={{width: '64px', height: 'auto'}} alt="artwork"></img> 
+                                <img key={comic_id} src={link} style={{width: '64px', height: 'auto'}} alt="artwork"></img> 
                             )
                         });
                         

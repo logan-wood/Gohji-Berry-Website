@@ -5,12 +5,12 @@ const path = require('path')
 const dotenv = require('dotenv')
 dotenv.config({ path: './.env' })
 
-//serve production assets
-app.use(express.static("client/build"))
-
 //cors
 const cors = require('cors')
 app.use(cors())
+
+//serve production assets
+app.use(express.static("client/build"))
 
 //init router
 const router = require('./routes/router')
@@ -31,7 +31,7 @@ db.connect((err) => {
     }
 })
 
-const PORT = process.env.SERVER_PORT || 3001;
+const PORT = process.env.SERVER_PORT || 8080;
 app.listen(PORT, function () {
   console.log(
     'Server listening on ' + process.env.SERVER_DOMAIN + '\n'
