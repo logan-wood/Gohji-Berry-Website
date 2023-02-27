@@ -1,0 +1,50 @@
+#main {
+    display: flex;
+    overflow-x: hidden;
+    min-height: 100%;
+}
+
+#center {
+    min-width: 500px;
+    width: 100%;
+    text-align: center;
+    background-image: url('../images/background-1.png');
+    background-position: center top;
+    background-size: cover;
+}
+
+.nav {
+    margin: 230px 0;
+}
+
+.left-btn {
+    margin-left: -150px;
+}
+
+.right-btn {
+    margin-right: -159px;
+    margin-top: 200px;
+}
+
+#left {
+    width: 0;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+}
+
+#leftContent {
+    display: none;
+}
+
+#right {
+    min-height: 100%;
+}
+
+#rightContent {
+    display: none;
+}
+
+
