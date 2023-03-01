@@ -29,8 +29,8 @@ db.connect((err) => {
         console.log('could not connect to database\n')
         throw err
     }
-})
-
+},
+)
 const PORT = process.env.SERVER_PORT || 8080;
 app.listen(PORT, function () {
   console.log(

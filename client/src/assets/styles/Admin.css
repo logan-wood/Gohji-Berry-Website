@@ -1,0 +1,28 @@
+html, body {
+    margin: 0;
+}
+
+.adminPanel {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 33% auto;
+}
+
+.contentPanel, .controlPanel {
+    padding: 10px;
+    min-height: 100vh;
+}
+
+.controlPanel {
+    border-right: 1px solid black;
+    background-color: #e8eff0
+}
+
+.contentPanel {
+    background-color: #eed7cd;
+}
+
+h1, h4 {
+    margin: 0;
+    padding: 0;
+}
