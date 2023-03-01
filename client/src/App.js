@@ -3,54 +3,44 @@ import ComicList from './ComicList';
 import './assets/styles/App.css';
 import $ from 'jquery'
 
-function revealLeft() {
-    $('#main').animate({marginLeft: '80vw'})
-    $('#left').animate({width: '80vw'}, function() {
-        $('#left').children().css('display', 'block')
-    })
+function openLeft() {
+    document.querySelector('.main').classList.add('left-opened')
+    document.querySelector('.left').classList.add('opened')
 }
 
 function closeLeft() {
-    $('#main').animate({marginLeft: '0vw'})
-    $('#left').animate({width: '0vw'}, function() {
-        $('#center').children().css('display', 'block')
-    })
+    document.querySelector('.main').classList.remove('left-opened')
+    document.querySelector('.left').classList.remove('opened')
 }
 
-export default function Nav() {
+function openRight() {
+    document.querySelector('.main').classList.add('right-opened')
+    document.querySelector('.right').classList.add('opened')
+}
+
+function closeRight() {
+    document.querySelector('.main').classList.remove('right-opened')
+    document.querySelector('.right').classList.remove('opened')
+}
+
+export default function App() {
     return (
         <>      
-            <div id='main'>
-
-                <section id='left'>
-                    <div id='leftContent'>
-                        <button onClick={closeLeft}>close</button>
-                        <br></br>Content listed here...
-                        <ComicList></ComicList>
-                    </div>
-                </section>
-
-                <section id='center'>
-                    <div id='centerContent'>
-                        <h1>Gohji Berry</h1>
-                        <div className='nav'>
-                            <button onClick={revealLeft} className='left-btn'>reveal left</button><br></br>
-                            <button disabled className='right-btn'>reveal right</button><br></br>
-                        </div>
-                        <div className='footer'>
-                            <h4>all rights reserved</h4>
-                        </div>
-                    </div>
-                </section>
-
-                {/* <section id='right'>
-                    <div id='rightContent'>
-                        <button onClick={closeRight}>close</button>
-                        <br></br>Content listed here...
-                    </div>
-                </section> */}
-
+            <div className='main'>
+                <h1>Main content</h1>
+                <button onClick={openLeft}>open left</button>
+                <button onClick={openRight}> open right</button>
             </div>
+
+            <div className='left'>
+                <h4>Left Content</h4>
+                <button onClick={closeLeft}>close left</button>
+            </div>
+           
+           <div className='right'>
+                <h4>Right Content</h4>
+                <button onClick={closeRight}>close right</button>
+           </div>
         </>
     );
 }
