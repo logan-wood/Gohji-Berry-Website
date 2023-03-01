@@ -4,8 +4,10 @@ html, body {
 }
 
 .main {
-    background-color: #ffcaca54;
-    height: 100%;
+    background-image: url('../images/background-2.png');
+    background-size: cover;
+    background-position: center top;
+    height: 100vh;
     text-align: center;
     transition-duration: 0.3s; /* used when sections are closed */
 }
@@ -15,16 +17,20 @@ html, body {
     position: fixed;
     top: 0;
     width: 300px;
-    background-color: rgb(185, 227, 185);
+    height: 100vh;
+}
+
+.left {
+    background-color: #ef8354;
 }
 
 .right {
+    background-color: #a4dade;
     right: 0;
 }
 
 .left.opened, .right.opened {
     z-index: 1;
-    background-color: rgb(156, 234, 234);
 }
 
 .main.left-opened {

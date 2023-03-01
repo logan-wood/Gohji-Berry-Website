@@ -1,26 +1,23 @@
 import React from 'react';
 import ComicList from './ComicList';
 import './assets/styles/App.css';
-import $ from 'jquery'
 
 function openLeft() {
     document.querySelector('.main').classList.add('left-opened')
     setTimeout(() => { document.querySelector('.left').classList.add('opened'); }, 300)
 }
-
 function closeLeft() {
     document.querySelector('.main').classList.remove('left-opened')
-    setTimeout(() => { document.querySelector('.left').classList.remove('opened'); }, 300)
+    document.querySelector('.left').classList.remove('opened');
 }
 
 function openRight() {
     document.querySelector('.main').classList.add('right-opened')
-    document.querySelector('.right').classList.add('opened')
+    setTimeout(() => { document.querySelector('.right').classList.add('opened'); }, 300)
 }
-
 function closeRight() {
     document.querySelector('.main').classList.remove('right-opened')
-    setTimeout(() => { document.querySelector('.right').classList.remove('opened'); }, 300)
+    document.querySelector('.right').classList.remove('opened');
 }
 
 export default function App() {
@@ -35,6 +32,7 @@ export default function App() {
             <div className='left'>
                 <h4>Left Content</h4>
                 <button onClick={closeLeft}>close left</button>
+                <ComicList></ComicList>
             </div>
            
            <div className='right'>
