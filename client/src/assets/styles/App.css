@@ -1,5 +1,5 @@
 html, body {
-    height: 100vw;
+    height: 100vh;
     margin: 0;
 }
 
@@ -8,6 +8,7 @@ html, body {
     background-size: cover;
     background-position: center top;
     height: 100vh;
+    overflow: hidden;
     text-align: center;
     transition-duration: 0.3s; /* used when sections are closed */
 }

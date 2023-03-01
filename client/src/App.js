@@ -22,7 +22,7 @@ function closeRight() {
 
 export default function App() {
     return (
-        <>      
+        <>     
             <div className='main'>
                 <h1>Main content</h1>
                 <button onClick={openLeft}>open left</button>
@@ -38,6 +38,7 @@ export default function App() {
            <div className='right'>
                 <h4>Right Content</h4>
                 <button onClick={closeRight}>close right</button>
+                <ComicList></ComicList>
            </div>
         </>
     );
