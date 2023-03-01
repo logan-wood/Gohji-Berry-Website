@@ -1,65 +1,45 @@
 import React from 'react';
 import ComicList from './ComicList';
-import './App.css';
-import $ from 'jquery'
+import './assets/styles/App.css';
 
-function revealLeft() {
-    $('#center').children().css('display', 'none')
-    $('#left').animate({width: '80vw'}, function() {
-        $('#left').children().css('display', 'block')
-    })
-    $('#center').animate({width: '20vw'})
+function openLeft() {
+    document.querySelector('.main').classList.add('left-opened')
+    setTimeout(() => { document.querySelector('.left').classList.add('opened'); }, 300)
 }
-
 function closeLeft() {
-    $('#left').children().css('display', 'none')
-    $('#left').animate({width: '0vw'}, function() {
-        $('#center').children().css('display', 'block')
-    })
-    $('#center').animate({width: '100vw'})
+    document.querySelector('.main').classList.remove('left-opened')
+    document.querySelector('.left').classList.remove('opened');
 }
 
-function revealRight() {
-    $('#center').children().css('display', 'none')
-    $('#right').animate({width: '80vw'}, function() {
-        $('#right').children().css('display', 'block')
-    })
-    $('#center').animate({width: '20vw'})
+function openRight() {
+    document.querySelector('.main').classList.add('right-opened')
+    setTimeout(() => { document.querySelector('.right').classList.add('opened'); }, 300)
 }
-
 function closeRight() {
-    $('#right').children().css('display', 'none')
-    $('#right').animate({width: '0vw'}, function() {
-        $('#center').children().css('display', 'block')
-    })
-    $('#center').animate({width: '100vw'})
+    document.querySelector('.main').classList.remove('right-opened')
+    document.querySelector('.right').classList.remove('opened');
 }
 
-export default function Nav() {
+export default function App() {
     return (
-        <>      
-            <div id='main'>
-                <section id='left'>
-                    <div id='leftContent'>
-                        <button onClick={closeLeft}>close</button>
-                        <br></br>Content listed here...
-                    </div>
-                </section>
-                <section id='center'>
-                    <div id='centerContent'>
-                        <h1>Main</h1>
-                        <button onClick={revealLeft}>reveal left</button><br></br>
-                        <button onClick={revealRight}>reveal right</button><br></br>
-                        <ComicList></ComicList>
-                    </div>
-                </section>
-                <section id='right'>
-                    <div id='rightContent'>
-                        <button onClick={closeRight}>close</button>
-                        <br></br>Content listed here...
-                    </div>
-                </section>
+        <>     
+            <div className='main'>
+                <h1>Main content</h1>
+                <button onClick={openLeft}>open left</button>
+                <button onClick={openRight}> open right</button>
             </div>
+
+            <div className='left'>
+                <h4>Left Content</h4>
+                <button onClick={closeLeft}>close left</button>
+                <ComicList></ComicList>
+            </div>
+           
+           <div className='right'>
+                <h4>Right Content</h4>
+                <button onClick={closeRight}>close right</button>
+                <ComicList></ComicList>
+           </div>
         </>
     );
 }

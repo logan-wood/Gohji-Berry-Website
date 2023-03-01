@@ -1,0 +1,50 @@
+html, body {
+    height: 100vh;
+    margin: 0;
+}
+
+.main {
+    background-image: url('../images/background.png');
+    background-size: cover;
+    background-position: center top;
+    height: 100vh;
+    overflow: hidden;
+    text-align: center;
+    transition-duration: 0.3s; /* used when sections are closed */
+}
+
+.left, .right {
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+}
+
+.left {
+    background-color: #ef8354;
+}
+
+.right {
+    background-color: #a4dade;
+    right: 0;
+}
+
+.left.opened, .right.opened {
+    z-index: 1;
+}
+
+.main.left-opened {
+    transform: translateX(300px);
+    transition-duration: 0.3s;
+}
+
+.main.right-opened {
+    transform: translateX(-300px);
+    transition-duration: 0.3s;
+}
+
+h1 {
+    margin: 0;
+    padding: 20px;
+}
