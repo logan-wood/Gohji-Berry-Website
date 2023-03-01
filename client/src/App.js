@@ -5,12 +5,12 @@ import $ from 'jquery'
 
 function openLeft() {
     document.querySelector('.main').classList.add('left-opened')
-    document.querySelector('.left').classList.add('opened')
+    setTimeout(() => { document.querySelector('.left').classList.add('opened'); }, 300)
 }
 
 function closeLeft() {
     document.querySelector('.main').classList.remove('left-opened')
-    document.querySelector('.left').classList.remove('opened')
+    setTimeout(() => { document.querySelector('.left').classList.remove('opened'); }, 300)
 }
 
 function openRight() {
@@ -20,7 +20,7 @@ function openRight() {
 
 function closeRight() {
     document.querySelector('.main').classList.remove('right-opened')
-    document.querySelector('.right').classList.remove('opened')
+    setTimeout(() => { document.querySelector('.right').classList.remove('opened'); }, 300)
 }
 
 export default function App() {
