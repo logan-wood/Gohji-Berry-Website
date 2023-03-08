@@ -49,8 +49,8 @@ router.get('/getAllUpdates', function (req, res) {
     })
 })
 
-router.get('/uploadComic', function (req, res) {
-    
+router.post('/uploadComic', function (req, res) {
+    console.log('/uploadComic: request recieved')
 })
 
 module.exports = router;

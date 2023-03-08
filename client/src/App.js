@@ -41,6 +41,7 @@ export default function App() {
                 <div className='main-btns'>
                     <button onClick={openLeft}>open left</button>
                     <button onClick={openRight}> open right</button>
+                    <a href='/admin'>admin panel</a>
                 </div>
             </div>
 

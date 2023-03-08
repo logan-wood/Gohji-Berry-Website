@@ -26,3 +26,14 @@ h1, h4 {
     margin: 0;
     padding: 0;
 }
+
+.form * {
+    display: block;
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 80%;
+    max-width: 512px;
+    height: 128px;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import './assets/styles/Admin.css'
-import AddComic from './assets/components/AddComic'
+import UploadComic from './assets/components/UploadComic'
 
 class Admin extends React.Component {
     state = {
@@ -57,7 +57,7 @@ class Admin extends React.Component {
                         </div>
                         
                         <div className='contentPanel'>
-                            <AddComic></AddComic>
+                            <UploadComic></UploadComic>
                         </div>
                     </div>
 
