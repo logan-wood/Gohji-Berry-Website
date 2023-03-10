@@ -2,8 +2,15 @@ const express = require('express')
 const router = express.Router()
 const db = require('../database')
 
+//controllers
+const archiveController = require('../controllers/archiveController')
+const comicController = require('../controllers/comicController')
+const updateController = require('../controllers/updateController')
+const wipController = require('../controllers/wipController')
+
+//misc routes
 router.get('/', function (req, res) {
-    res.send('gohji berry API')
+    res.send('Welcome to the gohjiberry api. valid routes can be found in the /routes/router.js file.')
 })
 
 router.get('/pingDB', function (req, res) {
@@ -17,40 +24,19 @@ router.get('/pingDB', function (req, res) {
     })
 })
 
-router.get('/getAllComics', function (req, res) {
-    db.query("SELECT * FROM comics", function (err, result) {
-        if (err) throw err;
+//comics
+router.get('/getAllComics', comicController.getAllComics)
+router.post('/uploadComic', comicController.uploadComic)
 
-        res.json(result)
-    })
-})
+//archives
+router.get('/getAllArchives', archiveController.getAllArchives)
 
-router.get('/getAllArchives', function (req, res) {
-    db.query("SELECT * FROM archives", function (err, result) {
-        if (err) throw err;
+//wips
+router.get('/getAllWip', wipController.getAllWip)
 
-        res.json(result)
-    })
-})
+//updates
+router.get('/getAllUpdates', updateController.getAllUpdates)
 
-router.get('/getAllWip', function (req, res) {
-    db.query("SELECT * FROM wip", function (err, result) {
-        if (err) throw err;
 
-        res.json(result)
-    })
-})
-
-router.get('/getAllUpdates', function (req, res) {
-    db.query("SELECT * FROM updates", function (err, result) {
-        if (err) throw err;
-
-        res.json(result)
-    })
-})
-
-router.post('/uploadComic', function (req, res) {
-    console.log('/uploadComic: request recieved')
-})
 
 module.exports = router;

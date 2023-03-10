@@ -9,6 +9,10 @@ dotenv.config({ path: './.env' })
 const cors = require('cors')
 app.use(cors())
 
+//body parser
+var bodyParser = require('body-parser')
+app.use(bodyParser.json())
+
 //serve production assets
 app.use(express.static("client/build"))
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 class UploadComic extends React.Component {
   state = {
@@ -8,17 +8,17 @@ class UploadComic extends React.Component {
   }
 
   handleSubmit = async () => {
-    fetch('https://reqbin.com/post', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({message: 'test'})
-    }).then(data => {
-      console.log(data)
-    }).catch(e => {
+    try {
+      await fetch('http://localhost:8080/uploadComic', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.state)
+      })
+    } catch(e) {
       console.log(e)
-    })
+    }
   }
 
   render() {
@@ -26,7 +26,6 @@ class UploadComic extends React.Component {
       <React.Fragment>
         <h2>Upload Comic</h2>
 
-        <form className='form'>
             <label>Enter Comic Name:
                 <input type='text' onChange={(e) => this.setState({ name: e.target.value })} />
             </label>
@@ -39,7 +38,6 @@ class UploadComic extends React.Component {
 
             <button onClick={this.handleSubmit}>Submit</button>
 
-        </form>
       </React.Fragment>
     )
   }
