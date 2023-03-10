@@ -11,7 +11,7 @@ module.exports = {
     },
 
     uploadComic: (req, res) => {
-        console.log(req.body.files[0])
+        console.log(req.body)
         
         res.end()
     }

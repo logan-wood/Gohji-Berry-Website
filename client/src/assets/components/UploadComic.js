@@ -4,17 +4,38 @@ class UploadComic extends React.Component {
   state = {
     name: '',
     description: '',
-    files: FileList,
+    files: []
+  }
+
+  handleFileSelection = async (e) => {
+    e.preventDefault()
+
+    const fileList = e.target.files
+
+    //loop replacing current array in state with a new array with the new element appended
+    for (var i = 0; i < fileList.length; i++) {
+      await this.setState({ files: [...this.state.files, fileList[i]] })
+    }
   }
 
   handleSubmit = async () => {
+    const formData = new FormData();
+    
+    formData.append('name', this.state.name)
+    formData.append('description', this.state.description)
+    Object.values(this.state.files).forEach(file=>{
+      formData.append("files", file)
+    })
+
+    console.log(formData)
+
     try {
       await fetch('http://localhost:8080/uploadComic', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'multipart/form-data'
         },
-        body: JSON.stringify(this.state)
+        body: formData 
       })
     } catch(e) {
       console.log(e)
@@ -33,7 +54,7 @@ class UploadComic extends React.Component {
                 <textarea type='textbox' onChange={(e) => this.setState({ description: e.target.value })} />
             </label>
             <label>Upload File:
-                <input type='file' onChange={(e) => this.setState({ files: e.target.files})} multiple />
+                <input type='file' onChange={(e) => { this.handleFileSelection(e) }} multiple />
             </label>
 
             <button onClick={this.handleSubmit}>Submit</button>
