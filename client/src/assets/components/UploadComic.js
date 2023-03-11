@@ -27,16 +27,13 @@ class UploadComic extends React.Component {
       formData.append("files", file)
     })
 
-    console.log(formData)
-
     try {
-      await fetch('http://localhost:8080/uploadComic', {
+      const response = await fetch('http://localhost:8080/uploadComic', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
+        
         body: formData 
       })
+      console.log(response)
     } catch(e) {
       console.log(e)
     }
@@ -46,7 +43,6 @@ class UploadComic extends React.Component {
     return (
       <React.Fragment>
         <h2>Upload Comic</h2>
-
             <label>Enter Comic Name:
                 <input type='text' onChange={(e) => this.setState({ name: e.target.value })} />
             </label>
@@ -57,8 +53,7 @@ class UploadComic extends React.Component {
                 <input type='file' onChange={(e) => { this.handleFileSelection(e) }} multiple />
             </label>
 
-            <button onClick={this.handleSubmit}>Submit</button>
-
+            <button type='submit' onClick={this.handleSubmit}>Submit</button>
       </React.Fragment>
     )
   }

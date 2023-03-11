@@ -1,6 +1,23 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../database')
+const multer = require('multer')
+const path = require('path')
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, '../uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(
+          null,
+          file.fieldname + '-' + Date.now() + path.extname(file.originalname)
+        );
+    },
+})
+
+const upload = multer({ storage: storage })
+const uploadMultiple = upload.fields([{ name: 'files' }])
 
 //controllers
 const archiveController = require('../controllers/archiveController')
@@ -26,7 +43,7 @@ router.get('/pingDB', function (req, res) {
 
 //comics
 router.get('/getAllComics', comicController.getAllComics)
-router.post('/uploadComic', comicController.uploadComic)
+router.post('/uploadComic', uploadMultiple, comicController.uploadComic)
 
 //archives
 router.get('/getAllArchives', archiveController.getAllArchives)
