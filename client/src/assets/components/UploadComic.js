@@ -30,10 +30,9 @@ class UploadComic extends React.Component {
     try {
       const response = await fetch('http://localhost:8080/uploadComic', {
         method: 'POST',
-        
         body: formData 
       })
-      console.log(response)
+      // console.log(response)
     } catch(e) {
       console.log(e)
     }

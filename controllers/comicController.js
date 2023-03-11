@@ -11,11 +11,6 @@ module.exports = {
     },
 
     uploadComic: (req, res) => {
-        if (req.files) {
-            console.log(req.files)
-        } else {
-            console.log('req.files not found')
-        }
 
         res.sendStatus(200)
     }
