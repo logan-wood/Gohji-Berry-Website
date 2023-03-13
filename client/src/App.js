@@ -37,10 +37,11 @@ export default function App() {
     return (
         <>     
             <div className='main'>
-                <h1>GohjiBerry</h1>
-                <div className='main-btn-container'>
-                    <button className='main-btn left-btn' id='btn-1' onClick={openLeft}>open left</button>
-                    <button className='main-btn right-btn' id='btn-2' onClick={openRight}> open right</button>
+                <h1>Main content</h1>
+                <div className='main-btns'>
+                    <button onClick={openLeft}>open left</button>
+                    <button onClick={openRight}> open right</button>
+                    <a href='/admin'>admin panel</a>
                 </div>
             </div>
 
