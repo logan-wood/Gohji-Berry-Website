@@ -26,7 +26,7 @@ app.get('*', (req, res) => {
 })
 
 //connect to database
-const db = require('./database.js')
+const db = require('./config/database')
 
 db.connect((err) => {
     if(err) {

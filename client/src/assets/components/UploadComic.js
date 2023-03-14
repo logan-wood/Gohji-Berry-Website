@@ -4,7 +4,7 @@ class UploadComic extends React.Component {
   state = {
     name: '',
     description: '',
-    files: []
+    uploadedFiles: []
   }
 
   handleFileSelection = async (e) => {
@@ -14,7 +14,7 @@ class UploadComic extends React.Component {
 
     //loop replacing current array in state with a new array with the new element appended
     for (var i = 0; i < fileList.length; i++) {
-      await this.setState({ files: [...this.state.files, fileList[i]] })
+      await this.setState({ uploadedFiles: [...this.state.uploadedFiles, fileList[i]] })
     }
   }
 
@@ -23,8 +23,8 @@ class UploadComic extends React.Component {
     
     formData.append('name', this.state.name)
     formData.append('description', this.state.description)
-    Object.values(this.state.files).forEach(file=>{
-      formData.append("files", file)
+    Object.values(this.state.uploadedFiles).forEach(file=>{
+      formData.append('uploadFiles', file)
     })
 
     try {

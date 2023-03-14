@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const db = require('../database')
+const db = require('../config/database')
 const multer = require('../config/multer')
 
 //controllers
@@ -27,7 +27,16 @@ router.get('/pingDB', function (req, res) {
 
 //comics
 router.get('/getAllComics', comicController.getAllComics)
-router.post('/uploadComic', multer.uploadMultiple, comicController.uploadComic)
+// router.post('/uploadComic', multer.uploadMultiple, comicController.uploadComic)
+router.post('/uploadComic', function(req, res) {
+    multer.uploadMultiple(req, res, (err) => {
+        if (!err) {
+            comicController.uploadComic(req, res)
+        } else {
+            console.log(err)
+        }
+    }) 
+})
 
 //archives
 router.get('/getAllArchives', archiveController.getAllArchives)

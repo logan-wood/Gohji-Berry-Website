@@ -6,7 +6,6 @@ const storage = multer.diskStorage({
         cb(null, path.join(__dirname, '..', '/uploads/comics'))
     },
     filename: function (req, file, cb) {
-        console.log(file)
         cb(
         null,
         file.fieldname + '-' + Date.now() + path.extname(file.originalname)
@@ -16,5 +15,14 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-module.exports = { uploadMultiple: upload.fields([{ name: 'files' }]) }
+module.exports = { uploadMultiple: 
+    upload.fields([{ name: 'uploadFiles' }], 
+        function(err) {
+            console.log('file uploaded')
+            if (err) {
+                console.log(err) 
+            }
+        }
+    )
+}
 
