@@ -25,18 +25,18 @@ module.exports = {
 
         var responseData
         // console.log('attempting to upload file...')
-        await b2.uploadFile({
+        const uplaodFileResponse = await b2.uploadFile({
             uploadUrl: uploadURL,
             uploadAuthToken: uploadAuthToken,
             fileName: filename,
             data: buffer
-        }).then((res) => {
-            responseData = res.data
-            // console.log(res.data)
-        }).catch((error) => {
+        });
+        try {
+            responseData = uplaodFileResponse.data;
+        } catch (error) {
             console.log(error)
             throw error
-        })
+        }
 
         return responseData
     }

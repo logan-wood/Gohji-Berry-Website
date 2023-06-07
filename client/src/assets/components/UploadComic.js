@@ -4,7 +4,8 @@ class UploadComic extends React.Component {
   state = {
     name: '',
     description: '',
-    uploadedFiles: []
+    uploadedFiles: [],
+    error: ''
   }
 
   handleFileSelection = async (e) => {
@@ -14,7 +15,7 @@ class UploadComic extends React.Component {
 
     //loop replacing current array in state with a new array with the new element appended
     for (var i = 0; i < fileList.length; i++) {
-      await this.setState({ uploadedFiles: [...this.state.uploadedFiles, fileList[i]] })
+      this.setState({ uploadedFiles: [...this.state.uploadedFiles, fileList[i]] })
     }
   }
 
@@ -27,15 +28,15 @@ class UploadComic extends React.Component {
       formData.append('uploadFiles', file)
     })
 
-    try {
-      const response = await fetch('http://localhost:8080/uploadComic', {
+    const response = await fetch('http://localhost:8080/uploadComic', {
         method: 'POST',
         body: formData 
-      })
-      // console.log(response)
-    } catch(e) {
-      console.log(e)
-    }
+    }).then((res) => {
+      this.setState({ error: 'Comic uploaded. Please allow some time for the files to be uploaded before displaying on the homepage' })
+    }).catch((error) => {
+      console.error(error)
+      this.setState({ error: 'There was an error uploading the comic. Please try again later' })
+    })
   }
 
   render() {
@@ -53,6 +54,8 @@ class UploadComic extends React.Component {
             </label>
 
             <button type='submit' onClick={this.handleSubmit}>Submit</button>
+
+            <p className='error'>{}</p>
       </React.Fragment>
     )
   }

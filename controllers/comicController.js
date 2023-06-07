@@ -19,6 +19,8 @@ module.exports = {
         var files = [];
         var b2FileNameArray = [];
 
+        console.log(req.files.uploadFiles)
+
         //populate fileURLs array
         for (const file of req.files.uploadFiles) {
             files.push({file: file.path, filename: file.filename})
@@ -33,25 +35,26 @@ module.exports = {
             const fileBuffer = fs.readFileSync(fileRelativePath)
 
             // upload file to storage
-            const fileUploadRes = await blobStorage.uploadFile(file.filename, fileBuffer).finally((res) => {
+            const fileUploadRes = await blobStorage.uploadFile('comics/' + file.filename, fileBuffer)
+            .catch((error) => {
+                console.error("Error uploading file: " + error);
+            })
 
-                // once files have been uploaded to cloud, delete files in uploads folder
-                req.files.uploadFiles.forEach(file => {
-                    fs.unlink(path.join(__dirname, '..', 'uploads/comics/', file.filename), function() {
-                        console.log(file.filename + ' deleted in ../uploads/comics')
-                    })
+            // once files have been uploaded to cloud, delete files in uploads folder
+            req.files.uploadFiles.forEach(file => {
+                fs.unlink(path.join(__dirname, '..', 'uploads/comics/', file.filename), function() {
+                    // console.log(file.filename + ' deleted in ../uploads/comics')
                 })
             })
 
             //next, add the cloud file storage filename to an array for the database entry
-            b2FileNameArray.push(fileUploadRes.fileName)
+            b2FileNameArray.push("https://f005.backblazeb2.com/file/gohji-berry/" + fileUploadRes.fileName)
         }
         
-        console.log('making new database entry...')
-        // make new database entry
-        // convert b2FileNameArray into something friendly with the sql query
-        console.log(b2FileNameArray)
+        // convert filename arary to something SQL friendly
+        friendlyFileNameArray = JSON.stringify(b2FileNameArray)
 
+        // make new database entry
         // db.query('INSERT INTO comics (comic_name, comic_description, file_paths) VALUES (?, ?, ?)', [name, description, b2FileNameArray], (err, result) => {
         //     if (err) throw err;
 
