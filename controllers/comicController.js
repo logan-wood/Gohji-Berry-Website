@@ -19,7 +19,8 @@ module.exports = {
         var files = [];
         var b2FileNameArray = [];
 
-        console.log(req.files.uploadFiles)
+        // keep track of whether file upload worked
+        var filesUploaded = true;
 
         //populate fileURLs array
         for (const file of req.files.uploadFiles) {
@@ -37,6 +38,7 @@ module.exports = {
             // upload file to storage
             const fileUploadRes = await blobStorage.uploadFile('comics/' + file.filename, fileBuffer)
             .catch((error) => {
+                filesUploaded = false;
                 console.error("Error uploading file: " + error);
             })
 
@@ -50,18 +52,22 @@ module.exports = {
             //next, add the cloud file storage filename to an array for the database entry
             b2FileNameArray.push("https://f005.backblazeb2.com/file/gohji-berry/" + fileUploadRes.fileName)
         }
+
+        if (b2FileNameArray && name && description && filesUploaded)
+        {
+            //make new database entry
+            db.query('INSERT INTO comics (comic_name, comic_description, file_paths) VALUES (?, ?, ?)', [name, description, JSON.stringify(b2FileNameArray)], (err, result) => {
+                if (err) {
+                    res.status(400).send('There was an error uploading the comic')
+                    throw err;
+                }
+
+                res.status(200).send('Comic Successfully Uploaded')
+            })
+        }
         
-        // convert filename arary to something SQL friendly
-        friendlyFileNameArray = JSON.stringify(b2FileNameArray)
-
-        // make new database entry
-        // db.query('INSERT INTO comics (comic_name, comic_description, file_paths) VALUES (?, ?, ?)', [name, description, b2FileNameArray], (err, result) => {
-        //     if (err) throw err;
-
-        //     console.log(result)
-        // })
 
 
-        res.sendStatus(200)
+        
     }
 }
