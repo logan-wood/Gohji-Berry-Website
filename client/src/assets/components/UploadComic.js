@@ -44,13 +44,13 @@ class UploadComic extends React.Component {
       <React.Fragment>
         <h2>Upload Comic</h2>
             <label>Enter Comic Name:
-                <input type='text' onChange={(e) => this.setState({ name: e.target.value })} />
+                <input type='text' onChange={(e) => this.setState({ name: e.target.value })} required />
             </label>
             <label>Enter Comic Description:
-                <textarea type='textbox' onChange={(e) => this.setState({ description: e.target.value })} />
+                <textarea type='textbox' onChange={(e) => this.setState({ description: e.target.value })} required />
             </label>
             <label>Upload File:
-                <input type='file' onChange={(e) => { this.handleFileSelection(e) }} multiple />
+                <input type='file' onChange={(e) => { this.handleFileSelection(e) }} multiple required />
             </label>
 
             <button type='submit' onClick={this.handleSubmit}>Submit</button>

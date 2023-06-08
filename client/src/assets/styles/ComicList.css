@@ -1,6 +1,32 @@
 .comic-container {
     height: 90%;
     margin: 0 auto;
-    text-align: center;
     overflow-y: scroll;
+}
+
+.comic {
+    margin: 0 auto;
+    background-color: #f4a380;
+    border-radius: 12px;
+    width: 80%;
+}
+
+.comic_name {
+    font-size: 1.1em;
+    text-align: left;
+    padding: 4px 8px;
+    margin-bottom: 0;
+}
+
+.comic_description {
+    font-size: 0.8em;
+    padding-left: 8px;
+    margin: 0px 0px 12px 0px;
+}
+
+.comic_img {
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    padding: 12px;
 }

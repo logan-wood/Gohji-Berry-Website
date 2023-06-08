@@ -10,11 +10,17 @@ class ComicList extends React.Component {
     getFetchComics() {
         this.setState({
             loading: true
-        }, () => {
-            fetch("http://localhost:8080/getAllComics").then(res => res.json()).then(result => this.setState({
+        })
+        fetch("http://localhost:8080/getAllComics")
+        .then(res => res.json())
+        .then((result) => {
+            this.setState({
                 loading: false,
                 comics: result
-            })).catch(console.log)
+            })
+        })
+        .catch((error) => {
+            console.error(error)
         })
     }
     componentDidMount() {
@@ -35,6 +41,8 @@ class ComicList extends React.Component {
                     }
 
                     {
+                        /* dynamicaly render comics */
+
                         comics.map(comic => {
                             const {
                                 comic_id,
@@ -42,18 +50,19 @@ class ComicList extends React.Component {
                                 comic_description,
                                 file_paths
                             } = comic
-                            //dynamically display pictures
+                            // dynamically save images to object
                             const file_paths_array = JSON.parse(file_paths)
                             const pictures = file_paths_array.map(link => {
                                 return ( 
-                                    <img key={comic_id} src={link} style={{width: '64px', height: 'auto'}} alt="artwork"></img> 
+                                    <img className='comic_img' key={comic_id} src={link} alt="artwork"></img> 
                                 )
                             });
                             
+                            // comic object
                             return (
-                                <div key={comic_id}>
-                                    <p>{comic_name}</p>
-                                    <p>{comic_description}</p>
+                                <div key={comic_id} className='comic'>
+                                    <p className='comic_name'>{comic_name}</p>
+                                    <p className='comic_description'>{comic_description}</p>
                                     {pictures}
                                     <br></br>
                                 </div>
