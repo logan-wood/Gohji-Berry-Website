@@ -20,6 +20,8 @@ class UploadComic extends React.Component {
   }
 
   handleSubmit = async () => {
+    this.setState({ error: 'Uploading comic. Please wait...' })
+
     const formData = new FormData();
     
     formData.append('name', this.state.name)
@@ -40,6 +42,7 @@ class UploadComic extends React.Component {
   }
 
   render() {
+    const error = this.state.error
     return (
       <React.Fragment>
         <h2>Upload Comic</h2>
@@ -54,6 +57,8 @@ class UploadComic extends React.Component {
             </label>
 
             <button type='submit' onClick={this.handleSubmit}>Submit</button>
+
+            {error}
 
             <p className='error'>{}</p>
       </React.Fragment>
