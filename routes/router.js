@@ -27,7 +27,7 @@ router.get('/pingDB', function (req, res) {
 
 //comics
 router.get('/getAllComics', comicController.getAllComics)
-// router.post('/uploadComic', multer.uploadMultiple, comicController.uploadComic)
+
 router.post('/uploadComic', function(req, res) {
     multer.uploadMultiple(req, res, (err) => {
         if (!err) {
@@ -37,6 +37,8 @@ router.post('/uploadComic', function(req, res) {
         }
     }) 
 })
+
+router.delete('/deleteComic/:comic_id', comicController.deleteComic)
 
 //archives
 router.get('/getAllArchives', archiveController.getAllArchives)

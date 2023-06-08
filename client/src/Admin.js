@@ -1,22 +1,28 @@
 import React from 'react';
-import './assets/styles/Admin.css'
-import UploadComic from './assets/components/UploadComic'
+import './assets/styles/Admin.css';
+import UploadComic from './assets/components/UploadComic';
+import DeleteComic from './assets/components/DeleteComic';
 
 class Admin extends React.Component {
     state = {
         isLoading: true,
         isAuthenticated: false,
-        isConnected: false
+        isConnected: false,
+        selection: '',
+        error: ''
     }
 
     pingDatabase() {
-        this.setState({
-            loading: true
-        }, () => {
-            fetch("http://localhost:8080/pingDB").then(result => this.setState({
+        fetch("http://localhost:8080/pingDB")
+        .then((result) => {
+            this.setState({
                 loading: false,
                 connected: result
-            })).catch(console.log)
+            })
+        })
+        .catch((error) => {
+            console.error(error)
+            this.setState({ error: 'There was an error connecting to the database' })
         })
     }
 
@@ -25,7 +31,7 @@ class Admin extends React.Component {
         // FOR DEVELOPMENT, SKIP AUTHENTICATION
         // const password = prompt('Please Enter Admin Password')
 
-        // if (password.match('password')) {
+        // if (password.match(process.env.REACT_APP_ADMIN_PASSWORD)) {
         //     this.setState({ authenticated: true });
         // }
     }
@@ -36,9 +42,10 @@ class Admin extends React.Component {
     }
 
     render() {
-        const {
+        var {
             authenticated,
-            connected
+            connected,
+            selection
         } = this.state
 
         if (authenticated) {
@@ -51,13 +58,15 @@ class Admin extends React.Component {
                                 connected ? <h4>connected to database</h4> : <h4>could not connect to database</h4>
                             }
 
-                            <button>Add Comic</button>
+                            <button onClick={() => {this.setState({ selection: 'addComic'})}}>Add Comic</button>
+                            <button onClick={() => {this.setState({ selection: 'deleteComic'})}}>Delete Comic</button>
 
 
                         </div>
                         
                         <div className='contentPanel'>
-                            <UploadComic></UploadComic>
+                            {selection === 'addComic' && <UploadComic></UploadComic>}
+                            {selection === 'deleteComic' && <DeleteComic></DeleteComic>}
                         </div>
                     </div>
 

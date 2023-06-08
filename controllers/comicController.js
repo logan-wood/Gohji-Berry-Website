@@ -6,11 +6,12 @@ const blobStorage = require('../config/blobStorage')
 module.exports = {
     getAllComics: async (req, res) => {
         db.query("SELECT * FROM comics", function (err, result) {
-            if (err) throw err;
+            if (err) {
+                res.status(400).send('There was an error getting comics from the database')
+            };
 
-            res.json(result)
+            res.status(200).json(result)
         })
-        
     },
 
     uploadComic: async (req, res) => {
@@ -65,9 +66,17 @@ module.exports = {
                 res.status(200).send('Comic Successfully Uploaded')
             })
         }
-        
+    },
 
+    deleteComic: async (req, res) => {
+        const comic_id = req.params.comic_id;
 
-        
+        db.query('DELETE FROM comics WHERE comic_id = ?', comic_id, (err) => {
+            if (err) {
+                res.status(400).send('There was an error deleting the comic from the database')
+            };
+
+            res.status(204).send();
+        })
     }
 }

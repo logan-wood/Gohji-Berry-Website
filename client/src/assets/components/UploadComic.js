@@ -30,10 +30,10 @@ class UploadComic extends React.Component {
       formData.append('uploadFiles', file)
     })
 
-    const response = await fetch('http://localhost:8080/uploadComic', {
+    fetch('http://localhost:8080/uploadComic', {
         method: 'POST',
         body: formData 
-    }).then((res) => {
+    }).then(() => {
       this.setState({ error: 'Comic uploaded. Please allow some time for the files to be uploaded before displaying on the homepage' })
     }).catch((error) => {
       console.error(error)
@@ -58,9 +58,7 @@ class UploadComic extends React.Component {
 
             <button type='submit' onClick={this.handleSubmit}>Submit</button>
 
-            {error}
-
-            <p className='error'>{}</p>
+            <p className='error'>{error}</p>
       </React.Fragment>
     )
   }
