@@ -7,9 +7,7 @@ const b2 = new B2({
 
 module.exports = {
     uploadFile: async (filename, buffer) => {
-        await b2.authorize().then(
-            // console.log('authorized')
-            )
+        await b2.authorize()
 
         var uploadURL, uploadAuthToken
         // console.log('getting upload url...')
@@ -39,5 +37,31 @@ module.exports = {
         }
 
         return responseData
+    },
+
+    // returns true if file has been deleted, false if not been deleted
+    deleteFile: async (fileId) => {
+        // check fileId is not null
+        if (fileId === '') {
+            return false
+        }
+        try {
+            await b2.authorize();
+
+            if (fileId) {
+                await b2.deleteFileVersion({
+                    fileId: fileId
+                })
+                .catch((error) => {
+                    console.error(error.message)
+                    return false;
+                })
+                return true;
+            } else {
+                return false;
+            }
+        } catch(error) {
+            console.error(error.message)
+        }
     }
 }

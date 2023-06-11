@@ -2,14 +2,15 @@ CREATE TABLE IF NOT EXISTS comics (
     comic_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     comic_name VARCHAR(16) NOT NULL,
     comic_description VARCHAR(64),
-    file_paths JSON NOT NULL
+    file_paths JSON NOT NULL,
+    file_id JSON NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS archive (
     archive_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     archive_name VARCHAR(16) NOT NULL,
     archive_description VARCHAR(64),
-    file_paths JSON NOT NULL
+    file_paths JSON NOT NULL,
 );
 
 CREATE TABLE IF NOT EXISTS wip (

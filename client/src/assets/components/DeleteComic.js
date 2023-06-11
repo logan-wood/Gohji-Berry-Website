@@ -36,6 +36,7 @@ class DeleteComic extends React.Component {
         })
         .then((res) => {
             if (res.status === 204) {
+                this.getAllComics()
                 this.setState({ error: 'Comic successfully deleted', isLoading: false })
             } else {
                 this.setState({ error: 'An error occured deleting the comic. Please try again later', isLoading: false })

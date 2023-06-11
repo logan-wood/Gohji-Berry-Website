@@ -13,16 +13,20 @@ const storage = multer.diskStorage({
     },
 })
 
-const upload = multer({ storage: storage })
+const upload = multer({ 
+    storage: storage,
+ })
 
-module.exports = { uploadMultiple: 
-    upload.fields([{ name: 'uploadFiles' }], 
-        function(err) {
-            console.log('file uploaded')
-            if (err) {
-                console.log(err) 
+module.exports = { 
+    uploadMultiple: async function() {
+        upload.fields([{ name: 'uploadFiles' }], 
+            function(err) {
+                console.log('file uploaded')
+                if (err) {
+                    console.log(err) 
+                }
             }
-        }
-    )
+        );
+    }
 }
 

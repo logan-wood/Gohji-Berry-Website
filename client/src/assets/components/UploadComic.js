@@ -8,16 +8,16 @@ class UploadComic extends React.Component {
     error: ''
   }
 
-  handleFileSelection = async (e) => {
-    e.preventDefault()
-
-    const fileList = e.target.files
-
-    //loop replacing current array in state with a new array with the new element appended
-    for (var i = 0; i < fileList.length; i++) {
-      this.setState({ uploadedFiles: [...this.state.uploadedFiles, fileList[i]] })
-    }
-  }
+  handleFileSelection = (e) => {
+    e.preventDefault();
+  
+    const fileList = e.target.files;
+  
+    // Loop through the fileList using callback form of setState
+    this.setState((prevState) => ({
+      uploadedFiles: [...prevState.uploadedFiles, ...fileList],
+    }));
+  };
 
   handleSubmit = async () => {
     this.setState({ error: 'Uploading comic. Please wait...' })
@@ -27,6 +27,7 @@ class UploadComic extends React.Component {
     formData.append('name', this.state.name)
     formData.append('description', this.state.description)
     Object.values(this.state.uploadedFiles).forEach(file=>{
+      console.log(file)
       formData.append('uploadFiles', file)
     })
 

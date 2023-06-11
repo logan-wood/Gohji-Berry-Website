@@ -58,6 +58,8 @@ class Admin extends React.Component {
                                 connected ? <h4>connected to database</h4> : <h4>could not connect to database</h4>
                             }
 
+                            <a href='/'>Home</a>
+
                             <button onClick={() => {this.setState({ selection: 'addComic'})}}>Add Comic</button>
                             <button onClick={() => {this.setState({ selection: 'deleteComic'})}}>Delete Comic</button>
 
