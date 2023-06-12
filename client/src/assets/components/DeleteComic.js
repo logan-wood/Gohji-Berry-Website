@@ -1,43 +1,65 @@
 import React from 'react'
-import './assets/styles/ComicList.css'
 
-class ComicList extends React.Component {
+class DeleteComic extends React.Component {
     state = {
         isLoading: true,
         comics: [],
-        error: null
+        error: ''
     }
-    getFetchComics() {
-        this.setState({
-            loading: true
-        })
-        fetch("http://localhost:8080/getAllComics")
-        .then(res => res.json())
-        .then((result) => {
+
+    getAllComics() {
+        var comics;
+
+        // get all comics from backend
+        fetch(process.env.REACT_APP_SERVER_DOMAIN + 'getAllComics')
+        .then(async(res) => {
+            const result = await res.json()
+
             this.setState({
-                loading: false,
+                isLoading: false,
                 comics: result
             })
         })
         .catch((error) => {
+            this.setState({ error: 'There was an error fetching comics' })
             console.error(error)
         })
     }
-    componentDidMount() {
-        this.getFetchComics();
+
+    deleteComic(comic_id) {
+        this.setState({ isLoading: true })
+
+        // make api call
+        fetch(process.env.REACT_APP_SERVER_DOMAIN + 'deleteComic/' + comic_id, {
+            method: 'DELETE'
+        })
+        .then((res) => {
+            if (res.status === 204) {
+                this.getAllComics()
+                this.setState({ error: 'Comic successfully deleted', isLoading: false })
+            } else {
+                this.setState({ error: 'An error occured deleting the comic. Please try again later', isLoading: false })
+            }
+        })
     }
+
+    componentDidMount() {
+        this.getAllComics()
+    }
+
     render() {
         const {
             comics,
+            isLoading,
             error
         } = this.state;
         return (
             <React.Fragment>
                 <div className='comic-container'>
-                    <h1>All Comics</h1>
+                    <h2>All Comics:</h2>
 
                     {
-                        error ? <p> { error.message } </p> : null
+                        error ? <p> { error } </p> : null
                     }
 
                     {
@@ -63,7 +85,7 @@ class ComicList extends React.Component {
                                 <div key={comic_id} className='comic'>
                                     <p className='comic_name'>{comic_name}</p>
                                     <p className='comic_description'>{comic_description}</p>
-                                    {pictures}
+                                    <button onClick={() => this.deleteComic(comic_id)}>Delete Comic</button>
                                     <br></br>
                                 </div>
                             );
@@ -73,8 +95,8 @@ class ComicList extends React.Component {
                     }
                 </div>
             </React.Fragment>
-        );
+        )
     }
 }
 
-export default ComicList
+export default DeleteComic

@@ -9,6 +9,10 @@ dotenv.config({ path: './.env' })
 const cors = require('cors')
 app.use(cors())
 
+//body parser
+var bodyParser = require('body-parser')
+app.use(bodyParser.json())
+
 //serve production assets
 app.use(express.static("client/build"))
 
@@ -22,15 +26,15 @@ app.get('*', (req, res) => {
 })
 
 //connect to database
-const db = require('./database.js')
+const db = require('./config/database')
 
 db.connect((err) => {
     if(err) {
         console.log('could not connect to database\n')
         throw err
     }
-})
-
+},
+)
 const PORT = process.env.SERVER_PORT || 8080;
 app.listen(PORT, function () {
   console.log(
