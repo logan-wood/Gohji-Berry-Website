@@ -18,6 +18,6 @@ const upload = multer({ storage: storage });
 
 module.exports = {
     uploadMultiple: function (req, res, next) {
-        upload.fields([{ name: 'uploadFiles' }])(req, res, next);
+        upload.fields([{ name: 'uploadFiles' }])(req, res, next());
     }
 };

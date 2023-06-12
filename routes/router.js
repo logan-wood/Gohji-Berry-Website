@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const db = require('../config/database')
 const multer = require('../config/multer')
+const multer2 = require('multer')
+const upload = multer2()
 
 //controllers
 const archiveController = require('../controllers/archiveController')
@@ -49,6 +51,10 @@ router.get('/getAllWip', wipController.getAllWip)
 
 //updates
 router.get('/getAllUpdates', updateController.getAllUpdates)
+
+router.post('/uploadUpdate', upload.none(), updateController.uploadUpdate)
+
+router.delete('/deleteUpdate/:updateId', updateController.deleteUpdate)
 
 
 

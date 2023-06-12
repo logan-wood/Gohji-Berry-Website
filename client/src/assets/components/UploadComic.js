@@ -31,15 +31,16 @@ class UploadComic extends React.Component {
       formData.append('uploadFiles', file)
     })
 
-    fetch('http://localhost:8080/uploadComic', {
+    fetch(process.env.REACT_APP_SERVER_DOMAIN + 'uploadComic', {
         method: 'POST',
         body: formData 
-    }).then(() => {
-      this.setState({ error: 'Comic uploaded. Please allow some time for the files to be uploaded before displaying on the homepage' })
-    }).catch((error) => {
-      console.error(error)
-      this.setState({ error: 'There was an error uploading the comic. Please try again later' })
     })
+    .then(() => {
+      this.setState({ error: 'Comic uploaded. Please allow some time for the files to be uploaded before displaying on the homepage' })
+    })
+    .catch(() => {
+      this.setState({ error: 'There was an error uploading the comic. Please try again later' })
+    });
   }
 
   render() {

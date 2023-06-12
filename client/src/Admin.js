@@ -2,6 +2,8 @@ import React from 'react';
 import './assets/styles/Admin.css';
 import UploadComic from './assets/components/UploadComic';
 import DeleteComic from './assets/components/DeleteComic';
+import UploadUpdate from './assets/components/UploadUpdate';
+import DeleteUpdate from './assets/components/DeleteUpdate';
 
 class Admin extends React.Component {
     state = {
@@ -61,7 +63,9 @@ class Admin extends React.Component {
                             <a href='/'>Home</a>
 
                             <button onClick={() => {this.setState({ selection: 'addComic'})}}>Add Comic</button>
-                            <button onClick={() => {this.setState({ selection: 'deleteComic'})}}>Delete Comic</button>
+                            <button onClick={() => {this.setState({ selection: 'deleteComic'})}}>Delete Comic</button>  
+                            <button onClick={() => {this.setState({ selection: 'uploadUpdate'})}}>Upload Update</button>
+                            <button onClick={() => {this.setState({ selection: 'deleteUpdate'})}}>Delete Update</button>
 
 
                         </div>
@@ -69,6 +73,8 @@ class Admin extends React.Component {
                         <div className='contentPanel'>
                             {selection === 'addComic' && <UploadComic></UploadComic>}
                             {selection === 'deleteComic' && <DeleteComic></DeleteComic>}
+                            {selection === 'uploadUpdate' && <UploadUpdate></UploadUpdate>}
+                            {selection === 'deleteUpdate' && <DeleteUpdate></DeleteUpdate>}
                         </div>
                     </div>
 

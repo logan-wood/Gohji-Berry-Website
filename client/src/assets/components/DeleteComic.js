@@ -14,7 +14,6 @@ class DeleteComic extends React.Component {
         fetch(process.env.REACT_APP_SERVER_DOMAIN + 'getAllComics')
         .then(async(res) => {
             const result = await res.json()
-            console.log(result)
 
             this.setState({
                 isLoading: false,
