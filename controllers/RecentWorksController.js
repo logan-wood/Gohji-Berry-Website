@@ -1,8 +1,8 @@
 const db = require('../config/database')
 
 module.exports = {
-    getAllArchives: (req, res) => {
-        db.query("SELECT * FROM archives", function (err, result) {
+    getAllRecentWorks: (req, res) => {
+        db.query("SELECT * FROM recent_works", function (err, result) {
             if (err) throw err;
     
             res.json(result)

@@ -6,7 +6,7 @@ const multer2 = require('multer')
 const upload = multer2()
 
 //controllers
-const archiveController = require('../controllers/archiveController')
+const recentWorksController = require('../controllers/RecentWorksController')
 const comicController = require('../controllers/comicController')
 const updateController = require('../controllers/updateController')
 const wipController = require('../controllers/wipController')
@@ -43,8 +43,8 @@ router.post('/uploadComic', function(req, res) {
 
 router.delete('/deleteComic/:comic_id', comicController.deleteComic)
 
-//archives
-router.get('/getAllArchives', archiveController.getAllArchives)
+//works
+router.get('/getAllRecentWorks', recentWorksController.getAllRecentWorks)
 
 //wips
 router.get('/getAllWip', wipController.getAllWip)
