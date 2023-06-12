@@ -26,35 +26,34 @@ module.exports = {
 
         //populate fileURLs array
         for (const file of req.files.uploadFiles) {
-            files.push({file: file.path, filename: file.filename})
+            files.push({file: file.path, filename: file.filename});
         }
 
         // upload files to blob storage
         for (const file of files) {
             // get filepath
-            fileRelativePath = path.join(__dirname, '..', '/uploads/comics/', file.filename)
+            fileRelativePath = path.join(__dirname, '..', '/uploads/comics/', file.filename);
                         
             // get file buffer
-            const fileBuffer = fs.readFileSync(fileRelativePath)
+            const fileBuffer = fs.readFileSync(fileRelativePath);
 
             // upload file to storage
             const fileUploadRes = await blobStorage.uploadFile('comics/' + file.filename, fileBuffer)
             .catch((error) => {
                 filesUploaded = false;
                 console.error("Error uploading file: " + error);
-            })
+            });
 
-            fileIdArray.push(fileUploadRes.fileId)
+            fileIdArray.push(fileUploadRes.fileId);
 
             // once files have been uploaded to cloud, delete files in uploads folder
-            req.files.uploadFiles.forEach(file => {
-                fs.unlink(path.join(__dirname, '..', 'uploads/comics/', file.filename), function() {
-                    // console.log(file.filename + ' deleted in ../uploads/comics')
-                })
-            })
+            fs.unlink(path.join(__dirname, '..', 'uploads/comics/', file.filename), () => {
+                console.log(file.filename + ' has been deleted.');
+            });
+            
 
             //next, add the cloud file storage filename to an array for the database entry
-            b2FileNameArray.push("https://f005.backblazeb2.com/file/gohji-berry/" + fileUploadRes.fileName)
+            b2FileNameArray.push("https://f005.backblazeb2.com/file/gohji-berry/" + fileUploadRes.fileName);
         }
 
         if (b2FileNameArray && name && description && filesUploaded)

@@ -1,32 +1,23 @@
-const multer = require('multer')
-const path = require('path')
+const { randomUUID } = require('crypto');
+const multer = require('multer');
+const path = require('path');
 
 const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, path.join(__dirname, '..', '/uploads/comics'))
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, '..', '/uploads/comics'));
     },
     filename: function (req, file, cb) {
         cb(
-        null,
-        file.fieldname + '-' + Date.now() + path.extname(file.originalname)
-        );
-    },
-})
-
-const upload = multer({ 
-    storage: storage,
- })
-
-module.exports = { 
-    uploadMultiple: async function() {
-        upload.fields([{ name: 'uploadFiles' }], 
-            function(err) {
-                console.log('file uploaded')
-                if (err) {
-                    console.log(err) 
-                }
-            }
+            null,
+            file.fieldname + '-' + randomUUID() + path.extname(file.originalname)
         );
     }
-}
+});
 
+const upload = multer({ storage: storage });
+
+module.exports = {
+    uploadMultiple: function (req, res, next) {
+        upload.fields([{ name: 'uploadFiles' }])(req, res, next);
+    }
+};

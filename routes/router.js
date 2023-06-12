@@ -31,6 +31,7 @@ router.get('/getAllComics', comicController.getAllComics)
 router.post('/uploadComic', function(req, res) {
     multer.uploadMultiple(req, res, (err) => {
         if (!err) {
+            console.log('files uploaded')
             comicController.uploadComic(req, res)
         } else {
             console.log(err)
