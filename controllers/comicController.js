@@ -32,7 +32,7 @@ module.exports = {
         // upload files to blob storage
         for (const file of files) {
             // get filepath
-            fileRelativePath = path.join(__dirname, '..', '/uploads/comics/', file.filename);
+            fileRelativePath = path.join(__dirname, '..', '/uploads/', file.filename);
                         
             // get file buffer
             const fileBuffer = fs.readFileSync(fileRelativePath);

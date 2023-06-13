@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ComicList from './ComicList';
 import UpdateList from './UpdateList';
+import RecentWorkList from './RecentWorkList';
 import './assets/styles/App.css';
 import $ from 'jquery';
 
@@ -43,11 +44,19 @@ export default function App() {
                 <h1>GohjiBerry</h1>
                 <a href='/admin'>admin panel</a>
                 <div className='main-btns'>
-                    <button className='main-btn' onClick={openRight}>Recent Works</button>
+                    <button className='main-btn' onClick={() => {
+                        openRight()
+                        setSelection('recentWorks')
+                    }}>Recent Works</button>
                     <button className='main-btn' onClick={() => {
                         openLeft()
-                        setSelection('updates')}
-                        }>Updates</button>
+                        setSelection('updates')
+                    }}>Updates</button>
+                    <button className='main-btn' onClick={() => {
+                        openRight()
+                        setSelection('comics')
+                    }}>Comics</button>
+                    <button className='main-btn'>Commisions</button>
                 </div>
             </div>
 
@@ -59,7 +68,8 @@ export default function App() {
            <div className='right'>
                 <h4>Right Content</h4>
                 <button onClick={closeRight}>close right</button>
-                <ComicList></ComicList>
+                {selection === 'recentWorks' && <RecentWorkList></RecentWorkList>}
+                {selection === 'comics' && <ComicList></ComicList>}
            </div>
         </>
     );

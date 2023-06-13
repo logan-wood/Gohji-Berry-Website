@@ -2,14 +2,11 @@ const express = require('express')
 const router = express.Router()
 const db = require('../config/database')
 const multer = require('../config/multer')
-const multer2 = require('multer')
-const upload = multer2()
 
 //controllers
 const recentWorksController = require('../controllers/RecentWorksController')
 const comicController = require('../controllers/comicController')
 const updateController = require('../controllers/updateController')
-const wipController = require('../controllers/wipController')
 
 //misc routes
 router.get('/', function (req, res) {
@@ -46,13 +43,12 @@ router.delete('/deleteComic/:comic_id', comicController.deleteComic)
 //works
 router.get('/getAllRecentWorks', recentWorksController.getAllRecentWorks)
 
-//wips
-router.get('/getAllWip', wipController.getAllWip)
+router.post('/uploadWork', multer.uploadSingle, recentWorksController.uploadWork)
 
 //updates
 router.get('/getAllUpdates', updateController.getAllUpdates)
 
-router.post('/uploadUpdate', upload.none(), updateController.uploadUpdate)
+router.post('/uploadUpdate', multer.uploadText, updateController.uploadUpdate)
 
 router.delete('/deleteUpdate/:updateId', updateController.deleteUpdate)
 
