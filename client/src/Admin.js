@@ -5,6 +5,7 @@ import DeleteComic from './assets/components/DeleteComic';
 import UploadUpdate from './assets/components/UploadUpdate';
 import DeleteUpdate from './assets/components/DeleteUpdate';
 import UploadWork from './assets/components/UploadWork';
+import DeleteWork from './assets/components/DeleteWork';
 
 class Admin extends React.Component {
     state = {
@@ -68,6 +69,7 @@ class Admin extends React.Component {
                             <button onClick={() => {this.setState({ selection: 'uploadUpdate'})}}>Upload Update</button>
                             <button onClick={() => {this.setState({ selection: 'deleteUpdate'})}}>Delete Update</button>
                             <button onClick={() => {this.setState({ selection: 'uploadWork' })}}>Upload Work</button>
+                            <button onClick={() => {this.setState({ selection: 'deleteWork'})}}>Delete Work</button>
 
                         </div>
                         
@@ -77,6 +79,7 @@ class Admin extends React.Component {
                             {selection === 'uploadUpdate' && <UploadUpdate></UploadUpdate>}
                             {selection === 'deleteUpdate' && <DeleteUpdate></DeleteUpdate>}
                             {selection === 'uploadWork' && <UploadWork></UploadWork>}
+                            {selection === 'deleteWork' && <DeleteWork></DeleteWork>}
                         </div>
                     </div>
 

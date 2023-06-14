@@ -4,7 +4,7 @@ const { randomUUID } = require('crypto');
 
 
 module.exports = {
-    getAllRecentWorks: (req, res) => {
+    getAllWorks: (req, res) => {
         db.query("SELECT * FROM recent_works", function (err, result) {
             if (err) throw err;
     
@@ -42,5 +42,43 @@ module.exports = {
         
         // everything was successfull
         res.status(200).send('Successfully uploaded Work')
+    },
+
+    deleteWork: async (req, res) => {
+        const work_id = req.params.workId;
+        var fileDeleted = false;
+
+        // get fileId from database
+        db.query('SELECT file_id FROM recent_works WHERE work_id = ?', work_id, async (err, result) => {
+            if (err) {
+                res.status(400).send('There was an error deleting the work from the database')
+                return
+            };
+
+            if (result) {
+                const fileId = result[0].file_id;
+            
+                // delete file from cloud storage
+                const fileDeleted = await blobStorage.deleteFile(fileId)
+
+                // delete from db
+                if (fileDeleted) {
+                    db.query('DELETE FROM recent_works WHERE work_id = ?', work_id, async (err, result) => {
+                        if (err) {
+                            console.log('error deleting from db')
+                            res.status(400).send('There was an error deleting the work from the database')
+                            return
+                        };
+                        // deleted record from db and cloud storage
+                        res.status(204).send('File has been deleted')
+                    })
+                }
+                else {
+                    console.log('fileDeleted: ' + fileDeleted)
+                    console.log('error deleting from cloud storage')
+                    res.status(400).send('There was an error deleting the work from the database')
+                }    
+            }
+        })
     }
 }
