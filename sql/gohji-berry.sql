@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS recent_works, comics, updates
+DROP TABLE IF EXISTS recent_works, comics, updates;
 
 CREATE TABLE IF NOT EXISTS comics (
     comic_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
