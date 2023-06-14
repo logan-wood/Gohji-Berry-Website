@@ -19,9 +19,7 @@ module.exports = {
         
         //upload file to cloud storage
         if (name && description && fileBuffer) {
-            console.log(fileBuffer)
             const fileName = 'works/' + randomUUID()
-            console.log(fileName)
 
             const fileUploadRes = await blobStorage.uploadFile(fileName, fileBuffer)
             .catch((error) => {
@@ -29,8 +27,6 @@ module.exports = {
                 res.status(400).send('Failed to upload the new entry.');
                 return;
             });
-
-            console.log(fileUploadRes)
 
             fileId = fileUploadRes.fileId
             filePath = "https://f005.backblazeb2.com/file/gohji-berry/" + fileUploadRes.fileName
