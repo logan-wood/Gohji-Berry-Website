@@ -11,7 +11,7 @@ class RecentWorkList extends React.Component {
         this.setState({
             loading: true
         })
-        fetch(process.env.REACT_APP_SERVER_DOMAIN + 'getAllRecentWorks')
+        fetch(process.env.REACT_APP_SERVER_DOMAIN + 'getAllWorks')
         .then(res => res.json())
         .then((result) => {
             this.setState({
