@@ -50,13 +50,8 @@ h1 {
 }
 
 /* nav area btns */
-.main-btn-container {
-    background-color: rgba(203, 251, 203, 0.379);
-}
-
 .main-btn {
     display: block;
-    position: fixed;
     background-color: transparent;
     border: none;
     font-size: 1em;

@@ -16,26 +16,22 @@ module.exports = {
         }).then((res) => {
             uploadURL = res.data.uploadUrl
             uploadAuthToken = res.data.authorizationToken
-            // console.log(res.data)
-            // console.log('promise resolved, uploadURL set')
-            
-        })
+        });
 
-        var responseData
         // console.log('attempting to upload file...')
-        const uplaodFileResponse = await b2.uploadFile({
+        const uploadFileResponse = await b2.uploadFile({
             uploadUrl: uploadURL,
             uploadAuthToken: uploadAuthToken,
             fileName: filename,
             data: buffer
+        })
+        .catch((error) => {
+            console.error('Upload to cloud storage failed: ' + error);
+            return null;
         });
-        try {
-            responseData = uplaodFileResponse.data;
-        } catch (error) {
-            console.log(error)
-            throw error
-        }
-
+        
+        const responseData = uploadFileResponse.data;
+        
         return responseData
     },
 

@@ -2,14 +2,11 @@ const express = require('express')
 const router = express.Router()
 const db = require('../config/database')
 const multer = require('../config/multer')
-const multer2 = require('multer')
-const upload = multer2()
 
 //controllers
-const recentWorksController = require('../controllers/RecentWorksController')
+const worksController = require('../controllers/worksController')
 const comicController = require('../controllers/comicController')
 const updateController = require('../controllers/updateController')
-const wipController = require('../controllers/wipController')
 
 //misc routes
 router.get('/', function (req, res) {
@@ -30,29 +27,31 @@ router.get('/pingDB', function (req, res) {
 //comics
 router.get('/getAllComics', comicController.getAllComics)
 
-router.post('/uploadComic', function(req, res) {
-    multer.uploadMultiple(req, res, (err) => {
-        if (!err) {
-            console.log('files uploaded')
-            comicController.uploadComic(req, res)
-        } else {
-            console.log(err)
-        }
-    }) 
-})
+// router.post('/uploadComic', function(req, res) {
+//     multer.uploadMultiple(req, res, (err) => {
+//         if (!err) {
+//             comicController.uploadComic(req, res)
+//         } else {
+//             console.log(err)
+//         }
+//     }) 
+// })
+
+router.post('/uploadComic', multer.uploadMultiple, comicController.uploadComic)
 
 router.delete('/deleteComic/:comic_id', comicController.deleteComic)
 
 //works
-router.get('/getAllRecentWorks', recentWorksController.getAllRecentWorks)
+router.get('/getAllWorks', worksController.getAllWorks)
 
-//wips
-router.get('/getAllWip', wipController.getAllWip)
+router.post('/uploadWork', multer.uploadSingle, worksController.uploadWork)
+
+router.delete('/deleteWork/:workId', worksController.deleteWork)
 
 //updates
 router.get('/getAllUpdates', updateController.getAllUpdates)
 
-router.post('/uploadUpdate', upload.none(), updateController.uploadUpdate)
+router.post('/uploadUpdate', multer.uploadText, updateController.uploadUpdate)
 
 router.delete('/deleteUpdate/:updateId', updateController.deleteUpdate)
 

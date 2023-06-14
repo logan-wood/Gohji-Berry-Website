@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ComicList from './ComicList';
+import UpdateList from './UpdateList';
+import RecentWorkList from './RecentWorkList';
 import './assets/styles/App.css';
 import $ from 'jquery';
 
@@ -34,26 +36,40 @@ function closeRight() {
 }
 
 export default function App() {
+    const [selection, setSelection] = useState("");
+
     return (
         <>     
             <div className='main'>
-                <h1>Main content</h1>
+                <h1>GohjiBerry</h1>
+                <a href='/admin'>admin panel</a>
                 <div className='main-btns'>
-                    <button onClick={openLeft}>open left</button>
-                    <button onClick={openRight}> open right</button>
-                    <a href='/admin'>admin panel</a>
+                    <button className='main-btn' onClick={() => {
+                        openRight()
+                        setSelection('recentWorks')
+                    }}>Recent Works</button>
+                    <button className='main-btn' onClick={() => {
+                        openLeft()
+                        setSelection('updates')
+                    }}>Updates</button>
+                    <button className='main-btn' onClick={() => {
+                        openRight()
+                        setSelection('comics')
+                    }}>Comics</button>
+                    <button className='main-btn'>Commisions</button>
                 </div>
             </div>
 
             <div className='left'>
                 <button onClick={closeLeft}>close left</button>
-                <ComicList></ComicList>
+                {selection === 'updates' && <UpdateList></UpdateList>}
             </div>
            
            <div className='right'>
                 <h4>Right Content</h4>
                 <button onClick={closeRight}>close right</button>
-                <ComicList></ComicList>
+                {selection === 'recentWorks' && <RecentWorkList></RecentWorkList>}
+                {selection === 'comics' && <ComicList></ComicList>}
            </div>
         </>
     );

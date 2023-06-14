@@ -11,7 +11,7 @@ class ComicList extends React.Component {
         this.setState({
             loading: true
         })
-        fetch("http://localhost:8080/getAllComics")
+        fetch(process.env.REACT_APP_SERVER_DOMAIN + "getAllComics")
         .then(res => res.json())
         .then((result) => {
             this.setState({
