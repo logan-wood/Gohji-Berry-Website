@@ -3,6 +3,7 @@ import ComicList from './ComicList';
 import UpdateList from './UpdateList';
 import RecentWorkList from './RecentWorkList';
 import './assets/styles/App.css';
+import CloseIcon from './assets/icons/close.svg'
 import $ from 'jquery';
 
 function openLeft() {
@@ -22,6 +23,8 @@ function closeLeft() {
 
 function openRight() {
     document.querySelector('.main').classList.add('right-opened')
+    document.querySelector('#footer-p').classList.add('right-opened')
+
     setTimeout(() => { document.querySelector('.right').classList.add('opened'); }, 300)
 
     //disable main buttons
@@ -29,7 +32,9 @@ function openRight() {
 }
 function closeRight() {
     document.querySelector('.main').classList.remove('right-opened')
+    document.querySelector('#footer-p').classList.remove('right-opened')
     document.querySelector('.right').classList.remove('opened');
+
 
     //enable main buttons
     $('.main-btns *').attr('disabled', false)
@@ -42,35 +47,38 @@ export default function App() {
         <>     
             <div className='main'>
                 <h1>GohjiBerry</h1>
-                <a href='/admin'>admin panel</a>
+                <a id="admin-link" href='/admin'>admin panel</a>
                 <div className='main-btns'>
-                    <button className='main-btn' onClick={() => {
+                    <button id="recentWorks-btn" className='main-btn right-btn' onClick={() => {
                         openRight()
                         setSelection('recentWorks')
                     }}>Recent Works</button>
-                    <button className='main-btn' onClick={() => {
+                    <button id="updates-btn" className='main-btn left-btn' onClick={() => {
                         openLeft()
                         setSelection('updates')
                     }}>Updates</button>
-                    <button className='main-btn' onClick={() => {
+                    <button id="comics-btn" className='main-btn right-btn' onClick={() => {
                         openRight()
                         setSelection('comics')
                     }}>Comics</button>
-                    <button className='main-btn'>Commisions</button>
+                    <button id="commisions-btn" className='main-btn left-btn'>Commisions</button>
                 </div>
             </div>
 
             <div className='left'>
-                <button onClick={closeLeft}>close left</button>
+                <img src={CloseIcon} className='close-icon' alt='close' onClick={closeLeft}></img>
                 {selection === 'updates' && <UpdateList></UpdateList>}
             </div>
            
            <div className='right'>
-                <h4>Right Content</h4>
-                <button onClick={closeRight}>close right</button>
+                <img src={CloseIcon} className='close-icon' alt='close' onClick={closeRight}></img>
                 {selection === 'recentWorks' && <RecentWorkList></RecentWorkList>}
                 {selection === 'comics' && <ComicList></ComicList>}
            </div>
+
+           <footer>
+            <p id='footer-p'>copyright @gohjiberry 2023</p>
+           </footer>
         </>
     );
 }
