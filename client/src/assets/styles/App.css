@@ -4,10 +4,12 @@ html, body {
 }
 
 .main {
+    position: relative;
     background-image: url('../images/background.png');
     background-size: cover;
     background-position: center top;
     height: 100vh;
+    width: 100vw;
     overflow: hidden;
     text-align: center;
     transition-duration: 0.3s; /* used when sections are closed */
@@ -77,6 +79,7 @@ h1 {
     text-align: center;
     border: none;
     font-size: 1em;
+    transform: traslate(-50%, -50%);
 }
 
 .main-btn:hover {
@@ -97,18 +100,18 @@ h1 {
 }
 
 #recentWorks-btn {
-    top: 60px;
+    bottom: 90%;
 }
 #updates-btn {
-    top: 240px;
+    bottom: 70%;
     margin-left: 20px;
 }
 #comics-btn {
-    top: 490px;
+    bottom: 40%;
     margin-right: 30px;
 }
 #commisions-btn {
-    top: 630px;
+    bottom: 15%;
 }
 
 /* left and right content areas */

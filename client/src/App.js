@@ -48,6 +48,7 @@ export default function App() {
             <div className='main'>
                 <h1>GohjiBerry</h1>
                 <a id="admin-link" href='/admin'>admin panel</a>
+                {/*  */}
                 <div className='main-btns'>
                     <button id="recentWorks-btn" className='main-btn right-btn' onClick={() => {
                         openRight()
