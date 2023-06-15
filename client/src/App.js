@@ -5,6 +5,7 @@ import RecentWorkList from './RecentWorkList';
 import './assets/styles/App.css';
 import CloseIcon from './assets/icons/close.svg'
 import $ from 'jquery';
+import Commissions from './Commissions';
 
 function openLeft() {
     document.querySelector('.main').classList.add('left-opened')
@@ -62,13 +63,17 @@ export default function App() {
                         openRight()
                         setSelection('comics')
                     }}>Comics</button>
-                    <button id="commisions-btn" className='main-btn left-btn'>Commisions</button>
+                    <button id="commissions-btn" className='main-btn left-btn' onClick={() => {
+                        openLeft()
+                        setSelection('commissions')
+                    }}>Commissions</button>
                 </div>
             </div>
 
             <div className='left'>
                 <img src={CloseIcon} className='close-icon' alt='close' onClick={closeLeft}></img>
                 {selection === 'updates' && <UpdateList></UpdateList>}
+                {selection === 'commissions' && <Commissions></Commissions>}
             </div>
            
            <div className='right'>
