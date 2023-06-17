@@ -45,7 +45,7 @@ class UploadWork extends React.Component {
     };
 
     handleCheckboxChange(event) {
-        const { value, checked } = event.target;
+        const { value, checked } = event.target
     
         if (checked) {
           // Add the tag to the array
@@ -72,12 +72,22 @@ class UploadWork extends React.Component {
                     <textarea type='textbox' onChange={(e) => this.setState({ description: e.target.value })} required />
                 </label>
                 <label>Add Tags:
-                    <label>sketch
-                        <input type='checkbox' name='sketch' value='sketch' onChange={(e) => this.handleCheckboxChange(e)}></input>
+                    <label>Sketch
+                        <input className='check' type='checkbox' name='sketch' value='sketch' onChange={(e) => this.handleCheckboxChange(e)}></input>
                     </label>
-                    <label>sketch
-                        <input type='checkbox' name='surreal' value='surreal' onChange={(e) => this.handleCheckboxChange(e)}></input>
+                    <label>Animation
+                        <input className='check' type='checkbox' name='animation' value='animation' onChange={(e) => this.handleCheckboxChange(e)}></input>
                     </label>
+                    <label>Observation/Study
+                        <input className='check' type='checkbox' name='observation/study' value='observation/study' onChange={(e) => this.handleCheckboxChange(e)}></input>
+                    </label>
+                    <label>Mixed Media
+                        <input className='check' type='checkbox' name='mixed_media' value='mixed_media' onChange={(e) => this.handleCheckboxChange(e)}></input>
+                    </label>
+                    <label>Miscellaneous
+                        <input className='check' type='checkbox' name='misc' value='misc' onChange={(e) => this.handleCheckboxChange(e)}></input>
+                    </label>
+                    
                 </label>
                 <label>Upload File:
                     <input type='file' onChange={(e) => { this.setState({ uploadedFile: e.target.files[0] }) }} required />

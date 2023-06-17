@@ -8,14 +8,12 @@ class RecentWorkList extends React.Component {
         error: ''
     }
     getAllRecentWorks() {
-        this.setState({
-            loading: true
-        })
+        this.setState({ isLoading: true });
         fetch(process.env.REACT_APP_SERVER_DOMAIN + 'getAllWorks')
         .then(res => res.json())
         .then((result) => {
             this.setState({
-                loading: false,
+                isLoading: false,
                 recentWorks: result
             })
         })
@@ -23,6 +21,21 @@ class RecentWorkList extends React.Component {
             this.setState({ error: 'There was an error fetching the recent works'})
             console.error(error)
         })
+    }
+    getWorkByTag(tag) {
+        this.setState({ isLoading: true });
+        fetch(process.env.REACT_APP_SERVER_DOMAIN + 'getWorksByTag/' + tag)
+        .then(res => res.json())
+        .then((result) => {
+            this.setState({
+                isLoading: false,
+                recentWorks: result
+            })
+        })
+        .catch((error) => {
+            this.setState({ error: 'There was an error fetching the recent works' });
+            console.error(error)
+        });
     }
     componentDidMount() {
         this.getAllRecentWorks();
@@ -36,6 +49,19 @@ class RecentWorkList extends React.Component {
             <React.Fragment>
                 <div className='recentWorks-container'>
                     <h1>All Recent Works</h1>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Dropdown</button>
+                        <div class="dropdown-content">
+                            <a onClick={() => {this.getWorkByTag('all')}}href="#">All</a>
+                            <a onClick={() => {this.getWorkByTag('sketch')}}href="#">Sketches</a>
+                            <a onClick={() => {this.getWorkByTag('animation')}}href="#">Animation</a>
+                            <a onClick={() => {this.getWorkByTag('observation/study')}}href="#">Observation/Study</a>
+                            <a onClick={() => {this.getWorkByTag('mixed_media')}}href="#">Mixed Media</a>
+                            <a onClick={() => {this.getWorkByTag('misc')}}href="#">Miscellanceous</a>
+
+                        </div>
+                    </div>
 
                     {
                         error ? <p> { error } </p> : null

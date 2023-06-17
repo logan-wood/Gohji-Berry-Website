@@ -18,8 +18,26 @@ html, body {
     background-color: #e8eff0
 }
 
-.contentPanel {
+.contentPanel{
     background-color: #eed7cd;
+    display: flex;
+    flex-direction: column;
+}
+
+.contentPanel * {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contentPanel input, textarea {
+    margin-bottom: 20px;
+}
+
+.contentPanel .check {
+    margin-bottom: 20px;
+    width: 15px;
+
 }
 
 h1, h4 {

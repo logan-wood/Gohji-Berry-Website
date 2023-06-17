@@ -27,22 +27,14 @@ router.get('/pingDB', function (req, res) {
 //comics
 router.get('/getAllComics', comicController.getAllComics)
 
-// router.post('/uploadComic', function(req, res) {
-//     multer.uploadMultiple(req, res, (err) => {
-//         if (!err) {
-//             comicController.uploadComic(req, res)
-//         } else {
-//             console.log(err)
-//         }
-//     }) 
-// })
-
 router.post('/uploadComic', multer.uploadMultiple, comicController.uploadComic)
 
 router.delete('/deleteComic/:comic_id', comicController.deleteComic)
 
 //works
 router.get('/getAllWorks', worksController.getAllWorks)
+
+router.get('/getWorksByTag/:tag', worksController.getWorksByTag)
 
 router.post('/uploadWork', multer.uploadSingle, worksController.uploadWork)
 

@@ -12,6 +12,27 @@ module.exports = {
         })
     },
 
+    getWorksByTag: (req, res) => {
+        const tag = req.params.tag;
+        var sql;
+
+        if (tag === 'all') {
+            sql = "SELECT * FROM recent_works"
+        } else {
+            sql = "SELECT * FROM recent_works WHERE JSON_CONTAINS(work_tags, JSON_QUOTE(?))"
+        }
+
+        db.query(sql, [tag], function(err, result) {
+            if (err) {
+                console.error("An error occured retrieving works from database: " + err);
+                res.status(400).send("An error occured retrieving works from the database");
+                return;
+            }
+
+            res.json(result);
+        });
+    },
+
     uploadWork: async (req, res) => {
         const {name, description, tags } = req.body;
         const fileBuffer = req.file.buffer;
