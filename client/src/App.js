@@ -53,18 +53,22 @@ export default function App() {
                 <div className='main-btns'>
                     <button id="recentWorks-btn" className='main-btn right-btn' onClick={() => {
                         openRight()
+                        closeLeft()
                         setSelection('recentWorks')
                     }}>Recent Works</button>
                     <button id="updates-btn" className='main-btn left-btn' onClick={() => {
                         openLeft()
+                        closeRight()
                         setSelection('updates')
                     }}>Updates</button>
                     <button id="comics-btn" className='main-btn right-btn' onClick={() => {
                         openRight()
+                        closeLeft()
                         setSelection('comics')
                     }}>Comics</button>
                     <button id="commissions-btn" className='main-btn left-btn' onClick={() => {
                         openLeft()
+                        closeRight()
                         setSelection('commissions')
                     }}>Commissions</button>
                 </div>

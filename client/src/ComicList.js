@@ -1,5 +1,6 @@
 import React from 'react'
 import './assets/styles/ComicList.css'
+import './assets/styles/ListAreas.css'
 
 class ComicList extends React.Component {
     state = {
@@ -33,7 +34,7 @@ class ComicList extends React.Component {
         } = this.state;
         return (
             <React.Fragment>
-                <div className='comic-container'>
+                <div className='list-container'>
                     <h1>All Comics</h1>
 
                     {
@@ -54,15 +55,15 @@ class ComicList extends React.Component {
                             const file_paths_array = JSON.parse(file_paths)
                             const pictures = file_paths_array.map(link => {
                                 return ( 
-                                    <img className='comic_img' key={comic_id} src={link} alt="artwork"></img> 
+                                    <img className='img' key={comic_id} src={link} alt="artwork"></img> 
                                 )
                             });
                             
                             // comic object
                             return (
-                                <div key={comic_id} className='comic'>
-                                    <p className='comic_name'>{comic_name}</p>
-                                    <p className='comic_description'>{comic_description}</p>
+                                <div key={comic_id} className='card'>
+                                    <p className='name'>{comic_name}</p>
+                                    <p className='description'>{comic_description}</p>
                                     {pictures}
                                     <br></br>
                                 </div>

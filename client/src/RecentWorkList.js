@@ -1,5 +1,7 @@
 import React from 'react'
 import './assets/styles/RecentWorkList.css'
+import './assets/styles/ListAreas.css'
+
 
 class RecentWorkList extends React.Component {
     state = {
@@ -47,20 +49,16 @@ class RecentWorkList extends React.Component {
         } = this.state;
         return (
             <React.Fragment>
-                <div className='recentWorks-container'>
-                    <h1>All Recent Works</h1>
+                <div className='list-container'>
+                    <h1>Recent Works</h1>
 
-                    <div class="dropdown">
-                        <button class="dropbtn">Dropdown</button>
-                        <div class="dropdown-content">
-                            <a onClick={() => {this.getWorkByTag('all')}}href="#">All</a>
-                            <a onClick={() => {this.getWorkByTag('sketch')}}href="#">Sketches</a>
-                            <a onClick={() => {this.getWorkByTag('animation')}}href="#">Animation</a>
-                            <a onClick={() => {this.getWorkByTag('observation/study')}}href="#">Observation/Study</a>
-                            <a onClick={() => {this.getWorkByTag('mixed_media')}}href="#">Mixed Media</a>
-                            <a onClick={() => {this.getWorkByTag('misc')}}href="#">Miscellanceous</a>
-
-                        </div>
+                    <div class="filter">
+                            <a class="filter-btn" onClick={() => {this.getWorkByTag('all')}}href="#">All</a>
+                            <a class="filter-btn" onClick={() => {this.getWorkByTag('sketch')}}href="#">Sketches</a>
+                            <a class="filter-btn" onClick={() => {this.getWorkByTag('animation')}}href="#">Animation</a>
+                            <a class="filter-btn" onClick={() => {this.getWorkByTag('observation/study')}}href="#">Observation/Study</a>
+                            <a class="filter-btn" onClick={() => {this.getWorkByTag('mixed_media')}}href="#">Mixed Media</a>
+                            <a class="filter-btn" onClick={() => {this.getWorkByTag('misc')}}href="#">Miscellanceous</a>
                     </div>
 
                     {
@@ -82,10 +80,10 @@ class RecentWorkList extends React.Component {
                             
                             // recent work object
                             return (
-                                <div key={work_id} className='work'>
-                                    <p className='work_name'>{work_name}</p>
-                                    <p className='work_description'>{work_description}</p>
-                                    <img className='work_img' key={work_id} src={file_path} alt="artwork"></img> 
+                                <div key={work_id} className='card'>
+                                    <p className='name'>{work_name}</p>
+                                    <p className='description'>{work_description}</p>
+                                    <img className='img' key={work_id} src={file_path} alt="artwork"></img> 
                                     <br></br>
                                 </div>
                             );

@@ -1,5 +1,6 @@
 import React from 'react'
 import './assets/styles/UpdateList.css'
+import './assets/styles/ListAreas.css'
 
 class UpdateList extends React.Component {
     state = {
@@ -35,8 +36,8 @@ class UpdateList extends React.Component {
         } = this.state;
         return (
             <React.Fragment>
-                <div className='update-container'>
-                    <h1>All updates</h1>
+                <div className='list-container'>
+                    <h1>Updates</h1>
 
                     {
                         error ? <p> { error } </p> : null
@@ -53,9 +54,9 @@ class UpdateList extends React.Component {
                             } = update;
 
                             return (
-                                <div key={update_id} className='update'>
-                                    <p className='update_name'>{update_name}</p>
-                                    <p className='update_description'>{update_description}</p>
+                                <div key={update_id} className='card'>
+                                    <p className='name'>{update_name}</p>
+                                    <p className='description'>{update_description}</p>
                                     <br></br>                                   
                                 </div>
                             );
