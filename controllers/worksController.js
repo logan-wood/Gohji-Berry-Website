@@ -19,7 +19,7 @@ module.exports = {
         if (tag === 'all') {
             sql = "SELECT * FROM recent_works"
         } else {
-            sql = "SELECT * FROM recent_works WHERE JSON_CONTAINS(work_tags, JSON_QUOTE(?))"
+            sql = `SELECT * FROM recent_works WHERE JSON_CONTAINS(work_tags, JSON_QUOTE("?"))`
         }
 
         db.query(sql, [tag], function(err, result) {

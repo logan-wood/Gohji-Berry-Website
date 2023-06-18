@@ -31,7 +31,8 @@ class RecentWorkList extends React.Component {
         .then((result) => {
             this.setState({
                 isLoading: false,
-                recentWorks: result
+                recentWorks: result,
+                error: ""
             })
         })
         .catch((error) => {
@@ -52,13 +53,17 @@ class RecentWorkList extends React.Component {
                 <div className='list-container'>
                     <h1>Recent Works</h1>
 
-                    <div class="filter">
+                    
+                    <div class="dropdown">
+                        <button class="dropbtn">Dropdown</button>
+                        <div class="dropdown-content">
                             <a class="filter-btn" onClick={() => {this.getWorkByTag('all')}}href="#">All</a>
                             <a class="filter-btn" onClick={() => {this.getWorkByTag('sketch')}}href="#">Sketches</a>
                             <a class="filter-btn" onClick={() => {this.getWorkByTag('animation')}}href="#">Animation</a>
                             <a class="filter-btn" onClick={() => {this.getWorkByTag('observation/study')}}href="#">Observation/Study</a>
                             <a class="filter-btn" onClick={() => {this.getWorkByTag('mixed_media')}}href="#">Mixed Media</a>
                             <a class="filter-btn" onClick={() => {this.getWorkByTag('misc')}}href="#">Miscellanceous</a>
+                        </div>
                     </div>
 
                     {
