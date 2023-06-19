@@ -12,12 +12,15 @@ class RecentWorkList extends React.Component {
         isDropdownOpen: false
     }
 
-    toggleDropdown = () => {
+    toggleDropdown = (e) => {
+        e.preventDefault()
         if (this.state.isDropdownOpen) {
-            $('#dropdown-content').hide(300)
+            $('#dropdown-content').slideUp(300)
+            // $('#dropdown-content').hide(300)
             $('#show-dropdown').removeClass('open')
         } else {
-            $('#dropdown-content').show(300)
+            $('#dropdown-content').slideDown(300)
+            // $('#dropdown-content').show(300)
             $('#show-dropdown').addClass('open')
         }
 
@@ -71,7 +74,7 @@ class RecentWorkList extends React.Component {
                 <h1>Recent Works</h1>
                 <div className='list-container'>
                     <div className='dropdown'>
-                        <button id='show-dropdown' className='filter-btn' onClick={this.toggleDropdown}>Filter</button>
+                        <button id='show-dropdown' className='filter-btn' onClick={e => this.toggleDropdown(e)}>Filter</button>
                         <div id='dropdown-content'>
                             <button className="filter-btn" onClick={() => {this.getWorkByTag('all')}}href="#">All</button>
                             <button className="filter-btn" onClick={() => {this.getWorkByTag('sketch')}}href="#">Sketches</button>
