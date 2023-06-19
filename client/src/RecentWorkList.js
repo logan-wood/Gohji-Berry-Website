@@ -1,14 +1,29 @@
 import React from 'react'
 import './assets/styles/RecentWorkList.css'
 import './assets/styles/ListAreas.css'
+import $ from 'jquery';
 
 
 class RecentWorkList extends React.Component {
     state = {
         isLoading: true,
         recentWorks: [],
-        error: ''
+        error: '',
+        isDropdownOpen: false
     }
+
+    toggleDropdown = () => {
+        if (this.state.isDropdownOpen) {
+            $('#dropdown-content').hide(300)
+        } else {
+            $('#dropdown-content').show(300)
+        }
+
+        this.setState((prevState) => ({
+            isDropdownOpen: !prevState.isDropdownOpen,
+        }));
+    }
+    
     getAllRecentWorks() {
         this.setState({ isLoading: true });
         fetch(process.env.REACT_APP_SERVER_DOMAIN + 'getAllWorks')
@@ -46,56 +61,58 @@ class RecentWorkList extends React.Component {
     render() {
         const {
             recentWorks,
-            error
+            error,
+            isDropdownOpen
         } = this.state;
         return (
             <React.Fragment>
                 <div className='list-container'>
                     <h1>Recent Works</h1>
 
-                    
-                    <div class="dropdown">
-                        <button class="dropbtn">Dropdown</button>
-                        <div class="dropdown-content">
-                            <a class="filter-btn" onClick={() => {this.getWorkByTag('all')}}href="#">All</a>
-                            <a class="filter-btn" onClick={() => {this.getWorkByTag('sketch')}}href="#">Sketches</a>
-                            <a class="filter-btn" onClick={() => {this.getWorkByTag('animation')}}href="#">Animation</a>
-                            <a class="filter-btn" onClick={() => {this.getWorkByTag('observation/study')}}href="#">Observation/Study</a>
-                            <a class="filter-btn" onClick={() => {this.getWorkByTag('mixed_media')}}href="#">Mixed Media</a>
-                            <a class="filter-btn" onClick={() => {this.getWorkByTag('misc')}}href="#">Miscellanceous</a>
+                    <div className='dropdown'>
+                        <button id='show-dropdown' onClick={this.toggleDropdown}>Filter</button>
+                        <div id='dropdown-content'>
+                            <button class="filter-btn" onClick={() => {this.getWorkByTag('all')}}href="#">All</button>
+                            <button class="filter-btn" onClick={() => {this.getWorkByTag('sketch')}}href="#">Sketches</button>
+                            <button class="filter-btn" onClick={() => {this.getWorkByTag('animation')}}href="#">Animation</button>
+                            <button class="filter-btn" onClick={() => {this.getWorkByTag('observation_study')}}href="#">Observation/Study</button>
+                            <button class="filter-btn" onClick={() => {this.getWorkByTag('mixed_media')}}href="#">Mixed Media</button>
+                            <button class="filter-btn" onClick={() => {this.getWorkByTag('misc')}}href="#">Miscellanceous</button>
                         </div>
                     </div>
 
-                    {
-                        error ? <p> { error } </p> : null
-                    }
+                    <div className='content'>
+                        {
+                            error ? <p> { error } </p> : null
+                        }
 
-                    {
-                        /* dynamicaly render recent works */
+                        {
+                            /* dynamicaly render recent works */
 
-                        recentWorks.map(recentWork => {
-                            const {
-                                work_id,
-                                work_name,
-                                work_description,
-                                file_path
-                            } = recentWork
-                            // dynamically save images to object
+                            recentWorks.map(recentWork => {
+                                const {
+                                    work_id,
+                                    work_name,
+                                    work_description,
+                                    file_path
+                                } = recentWork
+                                // dynamically save images to object
 
-                            
-                            // recent work object
-                            return (
-                                <div key={work_id} className='card'>
-                                    <p className='name'>{work_name}</p>
-                                    <p className='description'>{work_description}</p>
-                                    <img className='img' key={work_id} src={file_path} alt="artwork"></img> 
-                                    <br></br>
-                                </div>
-                            );
-                        })
+                                
+                                // recent work object
+                                return (
+                                    <div key={work_id} className='card'>
+                                        <p className='name'>{work_name}</p>
+                                        <p className='description'>{work_description}</p>
+                                        <img className='img' key={work_id} src={file_path} alt="artwork"></img> 
+                                        <br></br>
+                                    </div>
+                                );
+                            })
 
 
-                    }
+                        }
+                    </div>
                 </div>
             </React.Fragment>
         );
