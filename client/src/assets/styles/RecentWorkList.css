@@ -1,3 +1,13 @@
 #dropdown-content {
   display: none;
 }
+
+.filter-btn {
+  background: none;
+  border: none;
+  display: block;
+}
+
+.open {
+  text-decoration: underline;
+}

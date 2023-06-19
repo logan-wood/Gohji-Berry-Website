@@ -15,8 +15,10 @@ class RecentWorkList extends React.Component {
     toggleDropdown = () => {
         if (this.state.isDropdownOpen) {
             $('#dropdown-content').hide(300)
+            $('#show-dropdown').removeClass('open')
         } else {
             $('#dropdown-content').show(300)
+            $('#show-dropdown').addClass('open')
         }
 
         this.setState((prevState) => ({
@@ -70,14 +72,14 @@ class RecentWorkList extends React.Component {
                     <h1>Recent Works</h1>
 
                     <div className='dropdown'>
-                        <button id='show-dropdown' onClick={this.toggleDropdown}>Filter</button>
+                        <button id='show-dropdown' className='filter-btn' onClick={this.toggleDropdown}>Filter</button>
                         <div id='dropdown-content'>
-                            <button class="filter-btn" onClick={() => {this.getWorkByTag('all')}}href="#">All</button>
-                            <button class="filter-btn" onClick={() => {this.getWorkByTag('sketch')}}href="#">Sketches</button>
-                            <button class="filter-btn" onClick={() => {this.getWorkByTag('animation')}}href="#">Animation</button>
-                            <button class="filter-btn" onClick={() => {this.getWorkByTag('observation_study')}}href="#">Observation/Study</button>
-                            <button class="filter-btn" onClick={() => {this.getWorkByTag('mixed_media')}}href="#">Mixed Media</button>
-                            <button class="filter-btn" onClick={() => {this.getWorkByTag('misc')}}href="#">Miscellanceous</button>
+                            <button className="filter-btn" onClick={() => {this.getWorkByTag('all')}}href="#">All</button>
+                            <button className="filter-btn" onClick={() => {this.getWorkByTag('sketch')}}href="#">Sketches</button>
+                            <button className="filter-btn" onClick={() => {this.getWorkByTag('animation')}}href="#">Animation</button>
+                            <button className="filter-btn" onClick={() => {this.getWorkByTag('observation_study')}}href="#">Observation/Study</button>
+                            <button className="filter-btn" onClick={() => {this.getWorkByTag('mixed_media')}}href="#">Mixed Media</button>
+                            <button className="filter-btn" onClick={() => {this.getWorkByTag('misc')}}href="#">Miscellanceous</button>
                         </div>
                     </div>
 
