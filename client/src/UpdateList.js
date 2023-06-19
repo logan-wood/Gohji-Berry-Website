@@ -36,8 +36,9 @@ class UpdateList extends React.Component {
         } = this.state;
         return (
             <React.Fragment>
+                <h1>Updates</h1>
+
                 <div className='list-container'>
-                    <h1>Updates</h1>
 
                     {
                         error ? <p> { error } </p> : null

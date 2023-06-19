@@ -68,9 +68,8 @@ class RecentWorkList extends React.Component {
         } = this.state;
         return (
             <React.Fragment>
+                <h1>Recent Works</h1>
                 <div className='list-container'>
-                    <h1>Recent Works</h1>
-
                     <div className='dropdown'>
                         <button id='show-dropdown' className='filter-btn' onClick={this.toggleDropdown}>Filter</button>
                         <div id='dropdown-content'>

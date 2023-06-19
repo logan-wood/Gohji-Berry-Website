@@ -1,3 +1,7 @@
+    display: block;
+    text-align: center;
+}
+
 .list-container {
     height: 90%;
     margin: 0 auto;

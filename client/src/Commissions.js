@@ -7,8 +7,9 @@ class Commissions extends React.Component {
     render() {
         return (
             <React.Fragment>
+                <h1>Commission Information</h1>
+
                 <div className='commission-info'>
-                    <h1>Commission Information</h1>
                     <p>Thank you for considering my work for commission!</p>
                     <p>Please read the T&Cs below before continuing:</p>
                     <ul>
