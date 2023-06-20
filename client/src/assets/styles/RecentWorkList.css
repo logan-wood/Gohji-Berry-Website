@@ -1,5 +1,16 @@
+.card {
+  margin-bottom: 16px;
+}
+
+img {
+  display: block;
+  padding: 0 !important;
+  margin: 0 auto;
+}
+
 #dropdown-content {
   display: none;
+  margin-bottom: 16px;
   text-align: center;
   overflow: hidden;
 }
@@ -9,10 +20,12 @@
   border: none;
   display: block;
   margin: 10px auto;
+  text-decoration: underline 0.1em rgba(0, 0, 0, 0);
 }
 
 .open {
-  text-decoration: underline;
+  text-decoration: underline 0.09em rgba(0, 0, 0, 1);
+  transition: text-decoration-color 0.3s;
 }
 
 .card:hover {

@@ -44,7 +44,7 @@ class UpdateList extends React.Component {
                         error ? <p> { error } </p> : null
                     }
 
-{
+                    {
                         // dynamically render updates
                         updates.map(update => {
                             console.log(update)

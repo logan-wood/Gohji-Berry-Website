@@ -11,6 +11,7 @@ class RecentWorkList extends React.Component {
         recentWorks: [],
         error: '',
         isDropdownOpen: false,
+        selectedFilter: '',
         selectedWork: {},
         isBlurActive: false,
     }
@@ -50,6 +51,14 @@ class RecentWorkList extends React.Component {
 
     getWorkByTag(tag) {
         this.setState({ isLoading: true });
+
+        // add active class to active button
+        $(`#${tag}`).addClass('open')
+        if (this.state.selectedFilter != '') {
+            $(`#${this.state.selectedFilter}`).removeClass('open')
+        }
+        this.setState({ selectedFilter: tag })
+
         fetch(process.env.REACT_APP_SERVER_DOMAIN + 'getWorksByTag/' + tag)
         .then(res => res.json())
         .then((result) => {
@@ -72,10 +81,9 @@ class RecentWorkList extends React.Component {
     togglePageBlur() {
         this.setState({ isBlurActive: !this.state.isBlurActive }, () => {
             if (!this.state.isBlurActive) {
-                $('.blur-area').removeClass('active')   
+                $('.blur-area').removeClass('active')
                 $('.selected-work').removeClass('active')
             } else {
-                console.log('adding classes...')
                 $('.blur-area').addClass('active')   
                 $('.selected-work').addClass('active')
             }
@@ -99,12 +107,12 @@ class RecentWorkList extends React.Component {
                     <div className='dropdown'>
                         <button id='show-dropdown' className='filter-btn' onClick={e => this.toggleDropdown(e)}>Filter</button>
                         <div id='dropdown-content'>
-                            <button className="filter-btn" onClick={() => {this.getWorkByTag('all')}}href="#">All</button>
-                            <button className="filter-btn" onClick={() => {this.getWorkByTag('sketch')}}href="#">Sketches</button>
-                            <button className="filter-btn" onClick={() => {this.getWorkByTag('animation')}}href="#">Animation</button>
-                            <button className="filter-btn" onClick={() => {this.getWorkByTag('observation_study')}}href="#">Observation/Study</button>
-                            <button className="filter-btn" onClick={() => {this.getWorkByTag('mixed_media')}}href="#">Mixed Media</button>
-                            <button className="filter-btn" onClick={() => {this.getWorkByTag('misc')}}href="#">Miscellanceous</button>
+                            <button className="filter-btn" id='all' onClick={() => {this.getWorkByTag('all')}}>All</button>
+                            <button className="filter-btn" id='sketch' onClick={() => {this.getWorkByTag('sketch')}}>Sketches</button>
+                            <button className="filter-btn" id='animation' onClick={() => {this.getWorkByTag('animation')}}>Animation</button>
+                            <button className="filter-btn" id='observation_study' onClick={() => {this.getWorkByTag('observation_study')}}>Observation/Study</button>
+                            <button className="filter-btn" id='mixed_media' onClick={() => {this.getWorkByTag('mixed_media')}}>Mixed Media</button>
+                            <button className="filter-btn" id='misc' onClick={() => {this.getWorkByTag('misc')}}>Miscellanceous</button>
                         </div>
                     </div>
 
@@ -149,8 +157,8 @@ class RecentWorkList extends React.Component {
                             <div className='selected-work'>
                                 <h2>{selectedWork.work_name}</h2>
                                 <img src={closeIcon} className='selected-close-icon' onClick={() => {
-                                    this.setSelectedWork(null)
                                     this.togglePageBlur()
+                                    setTimeout(() => { this.setSelectedWork(null) }, 1000)
                                 }} alt='close'></img>
                                 <img src={selectedWork.file_path} className='content-img'></img>
                                 <p>{selectedWork.work_description}</p>
