@@ -2,6 +2,7 @@ import React from 'react'
 import './assets/styles/RecentWorkList.css'
 import './assets/styles/ListAreas.css'
 import $ from 'jquery';
+import closeIcon from './assets/icons/close.svg'
 
 
 class RecentWorkList extends React.Component {
@@ -9,7 +10,9 @@ class RecentWorkList extends React.Component {
         isLoading: true,
         recentWorks: [],
         error: '',
-        isDropdownOpen: false
+        isDropdownOpen: false,
+        selectedWork: {},
+        isBlurActive: false,
     }
 
     toggleDropdown = (e) => {
@@ -44,6 +47,7 @@ class RecentWorkList extends React.Component {
             console.error(error)
         })
     }
+
     getWorkByTag(tag) {
         this.setState({ isLoading: true });
         fetch(process.env.REACT_APP_SERVER_DOMAIN + 'getWorksByTag/' + tag)
@@ -60,6 +64,17 @@ class RecentWorkList extends React.Component {
             console.error(error)
         });
     }
+
+    setSelectedWork(selectedWork) {
+        this.setState({ selectedWork: selectedWork })
+    }
+
+    togglePageBlur() {
+        this.setState({ isBlurActive: !this.state.isBlurActive }, () => {
+            $('.selected-work').toggleClass('active')
+        })
+    }
+
     componentDidMount() {
         this.getAllRecentWorks();
     }
@@ -67,7 +82,8 @@ class RecentWorkList extends React.Component {
         const {
             recentWorks,
             error,
-            isDropdownOpen
+            selectedWork,
+            isBlurActive,
         } = this.state;
         return (
             <React.Fragment>
@@ -94,29 +110,51 @@ class RecentWorkList extends React.Component {
                             /* dynamicaly render recent works */
 
                             recentWorks.map(recentWork => {
+                                const currentWork = recentWork;
                                 const {
                                     work_id,
                                     work_name,
                                     work_description,
-                                    file_path
-                                } = recentWork
+                                    file_path,
+                                } = currentWork;
                                 // dynamically save images to object
 
                                 
                                 // recent work object
                                 return (
-                                    <div key={work_id} className='card'>
+                                    <div key={work_id} onClick={() => {
+                                        this.setSelectedWork(currentWork)
+                                        this.togglePageBlur()
+                                    }} className='card'>
                                         <img className='img' key={work_id} src={file_path} alt="artwork"></img> 
                                         <p className='name'>{work_name}</p>
-                                        {/* <p className='description'>{work_description}</p> */}
                                         <br></br>
                                     </div>
                                 );
                             })
-
-
                         }
                     </div>
+                    
+                    {
+                        selectedWork ? 
+                        
+                        <div className={`blur-area ${isBlurActive ? 'active' : ''}`}>
+                            <div className='selected-work'>
+                                <h2>{selectedWork.work_name}</h2>
+                                <img src={closeIcon} onClick={() => {
+                                    this.setSelectedWork(null)
+                                    this.togglePageBlur()
+                                }} alt='close'></img>
+                                <img src={selectedWork.file_path} className='content-img'></img>
+                                <p>{selectedWork.work_description}</p>
+                            </div>
+                        </div>
+
+                        :
+
+                        null
+                    }
+                    
                 </div>
             </React.Fragment>
         );
