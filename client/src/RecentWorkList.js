@@ -71,7 +71,14 @@ class RecentWorkList extends React.Component {
 
     togglePageBlur() {
         this.setState({ isBlurActive: !this.state.isBlurActive }, () => {
-            $('.selected-work').toggleClass('active')
+            if (!this.state.isBlurActive) {
+                $('.blur-area').removeClass('active')   
+                $('.selected-work').removeClass('active')
+            } else {
+                console.log('adding classes...')
+                $('.blur-area').addClass('active')   
+                $('.selected-work').addClass('active')
+            }
         })
     }
 
@@ -138,10 +145,10 @@ class RecentWorkList extends React.Component {
                     {
                         selectedWork ? 
                         
-                        <div className={`blur-area ${isBlurActive ? 'active' : ''}`}>
+                        <div className={'blur-area'}>
                             <div className='selected-work'>
                                 <h2>{selectedWork.work_name}</h2>
-                                <img src={closeIcon} onClick={() => {
+                                <img src={closeIcon} className='selected-close-icon' onClick={() => {
                                     this.setSelectedWork(null)
                                     this.togglePageBlur()
                                 }} alt='close'></img>
