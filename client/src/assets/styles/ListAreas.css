@@ -11,16 +11,14 @@ h1 {
 
 .card {
     margin: 0 auto;
-    background-color: #f4a380;
-    border-radius: 12px;
     width: 80%;
 }
 
 .name {
     font-size: 1.1em;
-    text-align: left;
-    padding: 4px 8px;
-    margin-bottom: 0;
+    text-align: center;
+    padding: 4px 8px 0px 8px;
+    margin: 0;
 }
 
 .description {

@@ -106,9 +106,9 @@ class RecentWorkList extends React.Component {
                                 // recent work object
                                 return (
                                     <div key={work_id} className='card'>
-                                        <p className='name'>{work_name}</p>
-                                        <p className='description'>{work_description}</p>
                                         <img className='img' key={work_id} src={file_path} alt="artwork"></img> 
+                                        <p className='name'>{work_name}</p>
+                                        {/* <p className='description'>{work_description}</p> */}
                                         <br></br>
                                     </div>
                                 );
