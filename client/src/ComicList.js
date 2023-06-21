@@ -55,16 +55,18 @@ class ComicList extends React.Component {
                             const file_paths_array = JSON.parse(file_paths)
                             const pictures = file_paths_array.map(link => {
                                 return ( 
-                                    <img className='img' key={comic_id} src={link} alt="artwork"></img> 
+                                    <>
+                                        <img className='comic_img' key={comic_id} src={link} alt="artwork"></img> 
+                                    </>
                                 )
                             });
                             
                             // comic object
                             return (
                                 <div key={comic_id} className='card'>
-                                    <p className='name'>{comic_name}</p>
-                                    <p className='description'>{comic_description}</p>
+                                    <p className='comic_name'>{comic_name}</p>
                                     {pictures}
+                                    <p className='comic_description'>{comic_description}</p>
                                     <br></br>
                                 </div>
                             );
