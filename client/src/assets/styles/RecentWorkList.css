@@ -1,3 +1,7 @@
+h1 {
+  margin-bottom: 8px !important;
+}
+
 .card {
   margin-bottom: 16px;
 }
@@ -8,9 +12,13 @@ img {
   margin: 0 auto;
 }
 
+#show-dropdown {
+  margin: 0 auto 16px auto;
+}
+
 #dropdown-content {
   display: none;
-  margin-bottom: 16px;
+  margin: -16px 0 16px 0;
   text-align: center;
   overflow: hidden;
 }
@@ -30,6 +38,13 @@ img {
 
 .card:hover {
   cursor: pointer;
+}
+
+.work_name {
+  text-align: center;
+  font-size: 1.1em;
+  padding: 4px 8px 0px 8px;
+  margin: 0;
 }
 
 .selected-work {

@@ -56,7 +56,7 @@ class UpdateList extends React.Component {
 
                             return (
                                 <div key={update_id} className='card'>
-                                    <p className='name'>{update_name}</p>
+                                    <p className='update_name'>{update_name}</p>
                                     <p className='description'>{update_description}</p>
                                     <br></br>                                   
                                 </div>

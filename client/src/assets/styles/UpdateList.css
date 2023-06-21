@@ -1,0 +1,21 @@
+.card {
+    width: 95%;
+    margin-bottom: 0 !important;
+}
+
+h1 {
+    margin-bottom: 24px !important;
+}
+
+.update_name {
+    font-size: 1.3em;
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 6px !important;
+    padding: 4px 8px 0px 8px;
+    margin: 0;
+}
+
+p {
+    margin-bottom: 0 !important;
+}

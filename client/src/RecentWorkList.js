@@ -142,7 +142,7 @@ class RecentWorkList extends React.Component {
                                         this.togglePageBlur()
                                     }} className='card'>
                                         <img className='img' key={work_id} src={file_path} alt="artwork"></img> 
-                                        <p className='name'>{work_name}</p>
+                                        <p className='work_name'>{work_name}</p>
                                         <br></br>
                                     </div>
                                 );
