@@ -1,4 +1,5 @@
 import React from 'react';
+import './assets/styles/Commissions.css'
 
 class Commissions extends React.Component {
     state = {
@@ -7,7 +8,7 @@ class Commissions extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <h1>Commission Information</h1>
+                <h1 class='commission-h1'>Commission Information</h1>
 
                 <div className='commission-info'>
                     <p>Thank you for considering my work for commission!</p>
@@ -28,7 +29,7 @@ class Commissions extends React.Component {
                             </ul>
                         </> 
                     ) : (
-                        <button onClick={() => this.setState({ termsAccepted: true })}>Agree</button>
+                        <button className='accept-btn' onClick={() => this.setState({ termsAccepted: true })}>Agree</button>
                     )}
                 </div>
             </React.Fragment>

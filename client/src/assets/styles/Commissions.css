@@ -1,0 +1,11 @@
+.commission-info {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.accept-btn {
+    padding: 8px 16px;
+    background-color: #a4dade;
+    border: 1px solid #5d2811;
+    border-radius: 8px;
+}
