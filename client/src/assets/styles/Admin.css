@@ -14,8 +14,14 @@ html, body {
 }
 
 .controlPanel {
+    display: flex;
+    flex-direction: column;
     border-right: 1px solid black;
     background-color: #e8eff0
+}
+
+.controlPanel * {
+    margin-bottom: 16px;
 }
 
 .contentPanel{
